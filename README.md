@@ -23,6 +23,28 @@ These guardrails mean that even if you're learning, the tools will guide you tow
 
 ---
 
+## Required Skills
+
+Before getting started, you should be comfortable with these basics. If any feel unfamiliar, the linked resources will help you brush up.
+
+- **Using the Terminal** - You'll need to type commands to install tools and run the project. No advanced skills required, just the basics of opening Terminal, typing commands, and navigating folders.
+  - [Terminal Basics for Mac](https://support.apple.com/guide/terminal/welcome/mac) - Apple's official guide
+  - [Command Line Crash Course](https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Environment_setup/Command_line) - MDN's beginner-friendly introduction
+
+- **Basic File Navigation** - Understanding how folders work on your computer and how to find files. Commands like `cd` (change directory) and `ls` (list files) are helpful to know.
+  - [Navigating Files and Directories](https://swcarpentry.github.io/shell-novice/02-filedir.html) - Software Carpentry tutorial
+
+- **Text Editing** - You'll be reading and occasionally editing code files. Any text editor works, but [VS Code](https://code.visualstudio.com/) is popular and free.
+  - [VS Code Getting Started](https://code.visualstudio.com/docs/getstarted/introvideos) - Video tutorials for beginners
+
+- **Basic Git Concepts** (optional but helpful) - Git saves versions of your code. Claude can handle most Git operations for you, but understanding commits and branches helps.
+  - [Git Handbook](https://docs.github.com/en/get-started/using-git/about-git) - GitHub's concise overview
+  - [Learn Git Branching](https://learngitbranching.js.org/) - Interactive visual tutorial
+
+Don't worry if you're not an expert in these areas. Claude Code can guide you through most tasks, and you'll learn as you go.
+
+---
+
 ## Glossary
 
 Here's what each technology in this project does and why it was chosen:
