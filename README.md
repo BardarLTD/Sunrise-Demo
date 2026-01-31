@@ -136,9 +136,20 @@ brew install pnpm
 
 ## Getting the Project
 
-### How to Clone a Git Repository
+### Step 1: Fork the Repository
 
-"Cloning" means downloading a copy of a project from GitHub to your computer.
+"Forking" creates your own copy of this project on GitHub. This is important because it lets you save your changes and push commits to your own repository.
+
+1. Make sure you have a [GitHub account](https://github.com/signup) (it's free)
+2. Go to [github.com/Oliver-Bagin/Claude-Bootstrap](https://github.com/Oliver-Bagin/Claude-Bootstrap)
+3. Click the **Fork** button in the top-right corner
+4. GitHub will create a copy under your account (e.g., `github.com/YOUR-USERNAME/Claude-Bootstrap`)
+
+Learn more: [GitHub's Guide to Forking](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
+
+### Step 2: Clone Your Fork
+
+"Cloning" downloads your forked copy to your computer so you can work on it.
 
 1. Open Terminal
 2. Navigate to where you want the project. For example, to put it in a "Projects" folder in your Documents:
@@ -147,19 +158,16 @@ brew install pnpm
    mkdir Projects
    cd Projects
    ```
-3. Clone this project:
+3. Clone **your fork** (replace `YOUR-USERNAME` with your GitHub username):
    ```bash
-   git clone git@github.com:Oliver-Bagin/Claude-Bootstrap.git
+   git clone https://github.com/YOUR-USERNAME/Claude-Bootstrap.git
    ```
 4. Move into the project folder:
    ```bash
    cd Claude-Bootstrap
    ```
 
-If you get an error about SSH keys, you can use the HTTPS URL instead:
-```bash
-git clone https://github.com/Oliver-Bagin/Claude-Bootstrap.git
-```
+Now you have your own copy that you can modify and push changes to.
 
 ---
 
