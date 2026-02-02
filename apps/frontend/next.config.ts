@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
     // Ensure build fails on lint errors
     ignoreDuringBuilds: false,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
