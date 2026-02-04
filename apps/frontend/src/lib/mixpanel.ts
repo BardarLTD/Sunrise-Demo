@@ -26,22 +26,35 @@ class MixpanelService {
       return;
     }
 
-    mixpanel.init(token, {
-      persistence: 'localStorage',
-      track_pageview: false,
-      api_host: 'https://mix.google-cloud.eventlytics.ai',
-      debug: process.env.NODE_ENV === 'development',
-      record_sessions_percent: 100,
-      autocapture: {
-        click: true,
-        scroll: true,
-        input: true,
-        pageview: false,
-      },
-    });
+    try {
+      const apiHost =
+        process.env.NEXT_PUBLIC_MIXPANEL_API_HOST || 'https://api.mixpanel.com';
 
-    this.mixpanel = mixpanel;
-    this.initialized = true;
+      mixpanel.init(token, {
+        persistence: 'localStorage',
+        track_pageview: false,
+        api_host: apiHost,
+        debug: process.env.NODE_ENV === 'development',
+        record_sessions_percent: 100,
+        ignore_dnt: true,
+        autocapture: {
+          click: true,
+          scroll: true,
+          input: true,
+          pageview: false,
+        },
+      });
+
+      this.mixpanel = mixpanel;
+      this.initialized = true;
+
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Mixpanel initialized with API host:', apiHost);
+      }
+    } catch (error) {
+      console.error('Failed to initialize Mixpanel:', error);
+      this.initialized = false;
+    }
   }
 
   setUserProperties(properties: UserProperties): void {
@@ -50,8 +63,12 @@ class MixpanelService {
       return;
     }
 
-    this.mixpanel.identify(properties.$email);
-    this.mixpanel.people.set(properties);
+    try {
+      this.mixpanel.identify(properties.$email);
+      this.mixpanel.people.set(properties);
+    } catch (error) {
+      console.error('Failed to set user properties:', error);
+    }
   }
 
   trackFeedback(event: FeedbackEvent): void {
@@ -60,7 +77,11 @@ class MixpanelService {
       return;
     }
 
-    this.mixpanel.track('Feedback Submitted', event);
+    try {
+      this.mixpanel.track('Feedback Submitted', event);
+    } catch (error) {
+      console.error('Failed to track feedback:', error);
+    }
   }
 
   track(eventName: string, properties?: Record<string, unknown>): void {
@@ -69,7 +90,11 @@ class MixpanelService {
       return;
     }
 
-    this.mixpanel.track(eventName, properties);
+    try {
+      this.mixpanel.track(eventName, properties);
+    } catch (error) {
+      console.error('Failed to track event:', error);
+    }
   }
 
   isInitialized(): boolean {
