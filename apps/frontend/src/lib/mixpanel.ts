@@ -38,6 +38,9 @@ class MixpanelService {
         record_sessions_percent: 100,
         ignore_dnt: true,
         autocapture: false,
+        record_mask_text_selector: '',
+        record_block_selector: '',
+        record_collect_fonts: true,
       });
 
       this.mixpanel = mixpanel;
