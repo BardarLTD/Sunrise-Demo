@@ -3,24 +3,37 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ChatDialog,
-  CommunityCardStack,
-  CustomerCarousel,
+  GeneratedCommunityCardStack,
+  GeneratedCustomerCarousel,
   FullscreenCard,
   Stepper,
   WhiteboardBackground,
 } from '@/components/fullscreen-cards';
 import { Header } from '@/components/Header';
-import { useGetCommunities, useGetCustomers } from '@/api/queries';
+import { useGenerateCustomers } from '@/api/queries/customers';
+import { useGenerateCommunities } from '@/api/queries/communities';
+import { usePersona } from '@/contexts/PersonaContext';
+import { GeneratingMessage } from '@/components/LoadingSkeleton';
+import FeedbackButton from '@/components/FeedbackButton';
 
 const CARD_IDS = ['card-1', 'card-2', 'card-3'] as const;
 
 export default function Home() {
   const [activeStep, setActiveStep] = useState(0);
   const containerRef = useRef<HTMLElement>(null);
-  const { data: customersData, isLoading: isLoadingCustomers } =
-    useGetCustomers();
-  const { data: communitiesData, isLoading: isLoadingCommunities } =
-    useGetCommunities();
+  const {
+    persona,
+    setPersona,
+    customers,
+    setCustomers,
+    communities,
+    setCommunities,
+  } = usePersona();
+
+  const generateCustomers = useGenerateCustomers();
+  const generateCommunities = useGenerateCommunities();
+
+  const [hasGeneratedCommunities, setHasGeneratedCommunities] = useState(false);
 
   const scrollToCard = useCallback((index: number) => {
     const cardId = CARD_IDS[index];
@@ -67,15 +80,44 @@ export default function Home() {
       <Stepper steps={3} currentStep={activeStep} onStepClick={scrollToCard} />
 
       <FullscreenCard id="card-1" centerContent showNextButton={false}>
-        <ChatDialog
-          welcomeTitle="Let's find your audience"
-          welcomeMessage="Describe your target customer in the prompt box below - we'll analyse real people meeting this description to find where they pay attention online. The more specific, the better."
-          placeholder="Describe your ideal customer..."
-          onSubmit={(message) => {
-            console.log('Submitted:', message);
-            scrollToCard(1);
-          }}
-        />
+        <div className="flex flex-col items-center gap-6">
+          <ChatDialog
+            welcomeTitle="Let's find your audience"
+            welcomeMessage="Describe your target customer in the prompt box below - we'll analyse real people meeting this description to find where they pay attention online. The more specific, the better."
+            placeholder="Describe your ideal customer..."
+            onSubmit={(message) => {
+              void (async () => {
+                setPersona(message);
+                setHasGeneratedCommunities(false);
+                scrollToCard(1);
+
+                try {
+                  const generatedCustomers =
+                    await generateCustomers.mutateAsync({
+                      persona: message,
+                      count: 5,
+                    });
+                  setCustomers(generatedCustomers);
+                } catch (error) {
+                  console.error('Failed to generate customers:', error);
+                }
+              })();
+            }}
+          />
+
+          {/* Discover optimum target feedback button */}
+          <FeedbackButton
+            question="This feature is in development. To help us build the best product, tell us what would you like to learn about your target customer, and how this would impact your marketing activities"
+            buttonText="Discover optimum target"
+            onClick={() => {
+              // No navigation - just collect feedback
+            }}
+            answerType="text"
+            className="group relative overflow-hidden rounded-xl border-2 border-emerald-500/30 bg-emerald-900/20 px-6 py-3 text-base font-medium text-emerald-400 transition-all hover:border-emerald-500/50 hover:bg-emerald-900/30 hover:text-emerald-300"
+          >
+            <>Discover optimum target</>
+          </FeedbackButton>
+        </div>
       </FullscreenCard>
 
       <section
@@ -111,15 +153,30 @@ export default function Home() {
 
           {/* Carousel */}
           <div className="mt-6 h-[480px] w-full shrink-0">
-            {isLoadingCustomers ? (
+            {generateCustomers.isPending ? (
               <div className="flex h-full items-center justify-center">
-                <p className="text-lg text-gray-300">Loading customers...</p>
+                <GeneratingMessage message="Analyzing your ideal customers..." />
               </div>
-            ) : customersData?.customers ? (
-              <CustomerCarousel customers={customersData.customers} />
+            ) : generateCustomers.isError ? (
+              <div className="flex h-full items-center justify-center">
+                <div className="text-center">
+                  <p className="text-lg text-red-400">
+                    Failed to generate customers
+                  </p>
+                  <p className="text-sm text-gray-400 mt-2">
+                    {generateCustomers.error instanceof Error
+                      ? generateCustomers.error.message
+                      : 'Unknown error'}
+                  </p>
+                </div>
+              </div>
+            ) : customers ? (
+              <GeneratedCustomerCarousel customers={customers} />
             ) : (
               <div className="flex h-full items-center justify-center">
-                <p className="text-lg text-gray-300">No customers found</p>
+                <p className="text-lg text-gray-300">
+                  Enter a persona description to generate customers
+                </p>
               </div>
             )}
           </div>
@@ -127,14 +184,33 @@ export default function Home() {
           {/* Analyse CTA Button */}
           <div className="mt-4 flex shrink-0 justify-center">
             <button
-              onClick={() => scrollToCard(2)}
+              onClick={() => {
+                void (async () => {
+                  scrollToCard(2);
+                  if (!hasGeneratedCommunities && persona && customers) {
+                    try {
+                      const generatedCommunities =
+                        await generateCommunities.mutateAsync({
+                          persona,
+                          customers,
+                          count: 5,
+                        });
+                      setCommunities(generatedCommunities);
+                      setHasGeneratedCommunities(true);
+                    } catch (error) {
+                      console.error('Failed to generate communities:', error);
+                    }
+                  }
+                })();
+              }}
+              disabled={!customers || generateCustomers.isPending}
               onMouseEnter={(e) =>
                 e.currentTarget.setAttribute('data-hover', 'true')
               }
               onMouseLeave={(e) =>
                 e.currentTarget.removeAttribute('data-hover')
               }
-              className="group relative overflow-hidden rounded-xl border border-white/10 px-8 py-4 text-base font-medium text-slate-300 transition-all hover:text-white"
+              className="group relative overflow-hidden rounded-xl border border-white/10 px-8 py-4 text-base font-medium text-slate-300 transition-all hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {/* Gradient background on hover */}
               <div
@@ -169,17 +245,30 @@ export default function Home() {
 
         {/* Card Stack - takes remaining space */}
         <div className="relative z-10 mt-12 min-h-0 flex-1">
-          {isLoadingCommunities ? (
+          {generateCommunities.isPending ? (
             <div className="flex h-full items-center justify-center">
-              <p className="text-lg text-gray-300">
-                Finding best communities...
-              </p>
+              <GeneratingMessage message="Finding where your customers pay attention..." />
             </div>
-          ) : communitiesData?.communities ? (
-            <CommunityCardStack communities={communitiesData.communities} />
+          ) : generateCommunities.isError ? (
+            <div className="flex h-full items-center justify-center">
+              <div className="text-center">
+                <p className="text-lg text-red-400">
+                  Failed to generate communities
+                </p>
+                <p className="text-sm text-gray-400 mt-2">
+                  {generateCommunities.error instanceof Error
+                    ? generateCommunities.error.message
+                    : 'Unknown error'}
+                </p>
+              </div>
+            </div>
+          ) : communities ? (
+            <GeneratedCommunityCardStack communities={communities} />
           ) : (
             <div className="flex h-full items-center justify-center">
-              <p className="text-lg text-gray-300">No communities found</p>
+              <p className="text-lg text-gray-300">
+                Analyze customers first to see community recommendations
+              </p>
             </div>
           )}
         </div>
