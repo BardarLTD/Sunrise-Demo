@@ -16,7 +16,7 @@ import { usePersona } from '@/contexts/PersonaContext';
 import { GeneratingMessage } from '@/components/LoadingSkeleton';
 import FeedbackButton from '@/components/FeedbackButton';
 
-const CARD_IDS = ['card-1', 'card-2', 'card-3'] as const;
+const CARD_IDS = ['card-1', 'card-2', 'card-3', 'card-4'] as const;
 
 export default function Home() {
   const [activeStep, setActiveStep] = useState(0);
@@ -77,7 +77,7 @@ export default function Home() {
       className="h-screen snap-y snap-mandatory overflow-y-scroll"
     >
       <Header />
-      <Stepper steps={3} currentStep={activeStep} onStepClick={scrollToCard} />
+      <Stepper steps={4} currentStep={activeStep} onStepClick={scrollToCard} />
 
       <FullscreenCard id="card-1" centerContent showNextButton={false}>
         <div className="flex flex-col items-center gap-6">
@@ -262,6 +262,21 @@ export default function Home() {
             are most engaged. Focus your marketing efforts here to maximize
             reach and improve conversion rates.
           </p>
+
+          {/* Content and trend insights feedback button */}
+          <div className="mt-6 flex justify-center">
+            <FeedbackButton
+              question="Feature in development. To make it as effective as possible, what specifically would you like to see? Is it the content customers are engaging with, emerging trends, key talking points and community focuses etc.? If possible, quantify how this would benefit you or what problem it would solve, i.e. this would inform content and save 4 hours per week in manual research"
+              buttonText="See content and trend insights instead"
+              onClick={() => {
+                // No navigation - just collect feedback
+              }}
+              answerType="text"
+              className="group relative overflow-hidden rounded-xl border-2 border-emerald-500/30 bg-emerald-900/20 px-6 py-3 text-base font-medium text-emerald-400 transition-all hover:border-emerald-500/50 hover:bg-emerald-900/30 hover:text-emerald-300"
+            >
+              <>See content and trend insights instead</>
+            </FeedbackButton>
+          </div>
         </div>
 
         {/* Card Stack - takes remaining space */}
@@ -292,6 +307,93 @@ export default function Home() {
               </p>
             </div>
           )}
+        </div>
+
+        {/* Complete Demo Button */}
+        <div className="relative z-20 pb-8 pt-4 flex shrink-0 justify-center">
+          <button
+            onClick={() => scrollToCard(3)}
+            disabled={!communities}
+            onMouseEnter={(e) =>
+              e.currentTarget.setAttribute('data-hover', 'true')
+            }
+            onMouseLeave={(e) => e.currentTarget.removeAttribute('data-hover')}
+            className="group relative overflow-hidden rounded-xl border border-white/10 px-8 py-4 text-base font-medium text-slate-300 transition-all hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {/* Gradient background on hover */}
+            <div
+              className="absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-40"
+              style={{ backgroundImage: 'url(/gradient-bg.png)' }}
+            />
+            {/* Solid background */}
+            <div className="absolute inset-0 bg-[#232323] opacity-100 transition-opacity duration-500 ease-out group-hover:opacity-70" />
+            <span className="relative z-10">Complete Demo</span>
+          </button>
+        </div>
+      </section>
+
+      <section
+        id="card-4"
+        className="relative flex h-screen snap-start flex-col overflow-hidden pt-14"
+      >
+        <WhiteboardBackground />
+
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4">
+          <div className="max-w-2xl w-full">
+            {/* Sign-up Box */}
+            <div className="rounded-2xl border border-white/10 bg-[#1a1a1a]/80 backdrop-blur-sm p-8 text-center">
+              <h2 className="text-3xl font-bold text-white mb-6">
+                Ready to Find Your Audience?
+              </h2>
+              <p className="text-slate-300 text-lg leading-relaxed mb-8">
+                If what we&apos;re building seems like it would add value for
+                you, sign up as a presale customer. You won&apos;t be charged
+                until after Talentsheet is launched, and you&apos;ve had a two
+                week free trial. Additionally, you&apos;ll get beta access
+                before then.
+              </p>
+
+              {/* Pricing Section */}
+              <div className="border-t border-white/10 pt-6 mb-8">
+                <div className="flex items-baseline justify-center gap-2 mb-3">
+                  <span className="text-4xl font-bold text-emerald-400">
+                    $100
+                  </span>
+                  <span className="text-xl text-slate-400">/track/month</span>
+                </div>
+                <p className="text-sm text-slate-400 max-w-lg mx-auto">
+                  A &quot;track&quot; can be a persona, a competitor, or an
+                  online audience such as a social media following.
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                {/* Sign Up Button */}
+                <a
+                  href="YOUR_STRIPE_LINK_HERE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative overflow-hidden rounded-xl bg-emerald-600 px-8 py-4 text-base font-medium text-white transition-all hover:bg-emerald-500"
+                >
+                  Sign Up
+                </a>
+
+                {/* Maybe Later Button with Feedback */}
+                <FeedbackButton
+                  question="What did you like and dislike about the product? Why didn't you sign up for presale, and what would you need the software to have to become a customer?"
+                  buttonText="Maybe Later"
+                  onClick={() => {
+                    // Feedback is collected via Mixpanel in FeedbackButton
+                  }}
+                  answerType="text"
+                  className="relative overflow-hidden rounded-xl border-2 border-white/20 bg-transparent px-8 py-4 text-base font-medium text-slate-300 transition-all hover:border-white/40 hover:text-white"
+                >
+                  <>Maybe Later</>
+                </FeedbackButton>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
