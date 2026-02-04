@@ -6,9 +6,11 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { CustomerProfile } from '@/types/customer';
 import { GeneratedCustomerCard } from './GeneratedCustomerCard';
 import FeedbackButton from '@/components/FeedbackButton';
+import { mixpanelService } from '@/lib/mixpanel';
 
 interface CustomerControlPanelProps {
   customers: CustomerProfile[];
+  onViewCommunities?: () => void;
 }
 
 // Helper function to get initials from name
@@ -39,7 +41,10 @@ function getColorFromName(name: string): string {
   return colors[hash % colors.length]!;
 }
 
-export function CustomerControlPanel({ customers }: CustomerControlPanelProps) {
+export function CustomerControlPanel({
+  customers,
+  onViewCommunities,
+}: CustomerControlPanelProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -49,6 +54,26 @@ export function CustomerControlPanel({ customers }: CustomerControlPanelProps) {
 
   const goToPrev = () => {
     setActiveIndex((prev) => (prev - 1 + customers.length) % customers.length);
+  };
+
+  const handleViewCustomers = () => {
+    // Track Mixpanel event
+    mixpanelService.track('View Customers Clicked', {
+      source: 'customer_control_panel',
+      customer_count: customers.length,
+      page: '/page-2',
+      timestamp: new Date().toISOString(),
+    });
+
+    // Expand the panel
+    setIsExpanded(true);
+  };
+
+  const handleViewCommunities = () => {
+    // Navigate to communities page
+    if (onViewCommunities) {
+      onViewCommunities();
+    }
   };
 
   return (
@@ -149,7 +174,7 @@ export function CustomerControlPanel({ customers }: CustomerControlPanelProps) {
             {/* Action Buttons */}
             <div className="flex gap-3">
               <button
-                onClick={() => setIsExpanded(true)}
+                onClick={handleViewCustomers}
                 className="group relative flex-1 overflow-hidden rounded-xl border border-white/10 py-4 text-base font-medium text-white transition-all hover:text-white"
               >
                 <div
@@ -160,7 +185,10 @@ export function CustomerControlPanel({ customers }: CustomerControlPanelProps) {
                 <span className="relative z-10">View Customers</span>
               </button>
 
-              <button className="group relative flex-1 overflow-hidden rounded-xl border border-emerald-500/30 py-4 text-base font-medium text-emerald-400 transition-all hover:border-emerald-500/50 hover:text-emerald-300">
+              <button
+                onClick={handleViewCommunities}
+                className="group relative flex-1 overflow-hidden rounded-xl border border-emerald-500/30 py-4 text-base font-medium text-emerald-400 transition-all hover:border-emerald-500/50 hover:text-emerald-300"
+              >
                 <div className="absolute inset-0 bg-emerald-900/20 transition-opacity duration-300 group-hover:bg-emerald-900/30" />
                 <span className="relative z-10">
                   See Marketing Recommendations

@@ -171,7 +171,28 @@ export default function Home() {
                 </div>
               </div>
             ) : customers ? (
-              <CustomerControlPanel customers={customers} />
+              <CustomerControlPanel
+                customers={customers}
+                onViewCommunities={() => {
+                  void (async () => {
+                    scrollToCard(2);
+                    if (!hasGeneratedCommunities && persona && customers) {
+                      try {
+                        const generatedCommunities =
+                          await generateCommunities.mutateAsync({
+                            persona,
+                            customers,
+                            count: 5,
+                          });
+                        setCommunities(generatedCommunities);
+                        setHasGeneratedCommunities(true);
+                      } catch (error) {
+                        console.error('Failed to generate communities:', error);
+                      }
+                    }
+                  })();
+                }}
+              />
             ) : (
               <div className="flex h-full items-center justify-center">
                 <p className="text-lg text-gray-300">
