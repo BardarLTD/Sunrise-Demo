@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { CustomerProfile } from '@/types/customer';
 import { GeneratedCustomerCard } from './GeneratedCustomerCard';
+import FeedbackButton from '@/components/FeedbackButton';
 
 interface CustomerControlPanelProps {
   customers: CustomerProfile[];
@@ -248,10 +249,23 @@ export function CustomerControlPanel({ customers }: CustomerControlPanelProps) {
                   </button>
                 </div>
 
+                {/* Contact Customers Button */}
+                <div className="mt-4">
+                  <FeedbackButton
+                    question="How would you like to use the customer list? Email outreach, Social DMs, Survey? some other creative idea? This will help us build the best possible tooling for this data. Assume we have all possible contact data. Please try and quantify how this would impact your business in numbers if possible (i.e. would save x hours finding and building mailing list)."
+                    buttonText="Contact Customers"
+                    onClick={() => {
+                      // No navigation - just collect feedback
+                    }}
+                    answerType="text"
+                    className="w-full rounded-lg border border-emerald-500/30 bg-emerald-900/20 py-2 text-sm font-medium text-emerald-400 transition-colors hover:border-emerald-500/50 hover:bg-emerald-900/30 hover:text-emerald-300"
+                  />
+                </div>
+
                 {/* Close Button */}
                 <button
                   onClick={() => setIsExpanded(false)}
-                  className="mt-4 w-full rounded-lg border border-white/10 py-2 text-sm text-slate-400 transition-colors hover:bg-white/5 hover:text-white"
+                  className="mt-3 w-full rounded-lg border border-white/10 py-2 text-sm text-slate-400 transition-colors hover:bg-white/5 hover:text-white"
                 >
                   Close Customer View
                 </button>
