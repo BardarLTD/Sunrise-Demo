@@ -5,6 +5,7 @@ class MixpanelService {
   private static instance: MixpanelService | null = null;
   private mixpanel: Mixpanel | null = null;
   private initialized = false;
+  private initializing = false;
 
   private constructor() {}
 
@@ -16,7 +17,8 @@ class MixpanelService {
   }
 
   initialize(): void {
-    if (this.initialized) {
+    // Prevent multiple simultaneous initializations
+    if (this.initialized || this.initializing) {
       return;
     }
 
@@ -26,12 +28,14 @@ class MixpanelService {
       return;
     }
 
+    this.initializing = true;
+
     try {
       const apiHost =
         process.env.NEXT_PUBLIC_MIXPANEL_API_HOST || 'https://api.mixpanel.com';
 
       mixpanel.init(token, {
-        persistence: 'localStorage',
+        persistence: 'cookie',
         track_pageview: false,
         api_host: apiHost,
         debug: process.env.NODE_ENV === 'development',
@@ -41,10 +45,14 @@ class MixpanelService {
         record_mask_text_selector: '',
         record_block_selector: '',
         record_collect_fonts: true,
+        batch_requests: true,
+        batch_size: 50,
+        batch_flush_interval_ms: 5000,
       });
 
       this.mixpanel = mixpanel;
       this.initialized = true;
+      this.initializing = false;
 
       if (process.env.NODE_ENV === 'development') {
         console.log('Mixpanel initialized with API host:', apiHost);
@@ -52,10 +60,16 @@ class MixpanelService {
     } catch (error) {
       console.error('Failed to initialize Mixpanel:', error);
       this.initialized = false;
+      this.initializing = false;
     }
   }
 
   setUserProperties(properties: UserProperties): void {
+    if (this.initializing) {
+      console.warn('Mixpanel is still initializing, skipping user properties');
+      return;
+    }
+
     if (!this.initialized || !this.mixpanel) {
       console.warn('Mixpanel not initialized');
       return;
@@ -65,11 +79,19 @@ class MixpanelService {
       this.mixpanel.identify(properties.$email);
       this.mixpanel.people.set(properties);
     } catch (error) {
-      console.error('Failed to set user properties:', error);
+      // Silently handle mutex errors to avoid console spam
+      if (error instanceof Error && !error.message.includes('mutex')) {
+        console.error('Failed to set user properties:', error);
+      }
     }
   }
 
   trackFeedback(event: FeedbackEvent): void {
+    if (this.initializing) {
+      console.warn('Mixpanel is still initializing, skipping feedback event');
+      return;
+    }
+
     if (!this.initialized || !this.mixpanel) {
       console.warn('Mixpanel not initialized');
       return;
@@ -78,11 +100,19 @@ class MixpanelService {
     try {
       this.mixpanel.track('Feedback Submitted', event);
     } catch (error) {
-      console.error('Failed to track feedback:', error);
+      // Silently handle mutex errors to avoid console spam
+      if (error instanceof Error && !error.message.includes('mutex')) {
+        console.error('Failed to track feedback:', error);
+      }
     }
   }
 
   track(eventName: string, properties?: Record<string, unknown>): void {
+    if (this.initializing) {
+      console.warn('Mixpanel is still initializing, skipping event');
+      return;
+    }
+
     if (!this.initialized || !this.mixpanel) {
       console.warn('Mixpanel not initialized');
       return;
@@ -91,7 +121,10 @@ class MixpanelService {
     try {
       this.mixpanel.track(eventName, properties);
     } catch (error) {
-      console.error('Failed to track event:', error);
+      // Silently handle mutex errors to avoid console spam
+      if (error instanceof Error && !error.message.includes('mutex')) {
+        console.error('Failed to track event:', error);
+      }
     }
   }
 
