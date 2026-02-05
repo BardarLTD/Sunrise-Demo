@@ -31,9 +31,9 @@ export function GeneratedCommunityCardStack({
   const totalChannels = 15;
 
   return (
-    <div className="flex h-full w-full gap-4 lg:gap-6 px-4 lg:px-8">
+    <div className="flex h-full w-full gap-4 lg:gap-6 px-4 lg:px-8 py-4">
       {/* Left: Navigation Panel */}
-      <div className="flex w-64 lg:w-72 xl:w-80 shrink-0 flex-col justify-center">
+      <div className="flex w-64 lg:w-72 xl:w-80 shrink-0 flex-col justify-start py-4">
         <div className="rounded-2xl border border-white/10 bg-[#232323] p-4 lg:p-5 xl:p-6 shadow-2xl">
           <h3 className="mb-3 lg:mb-4 text-lg lg:text-xl font-bold text-white">
             Channel Analysis
@@ -100,7 +100,7 @@ export function GeneratedCommunityCardStack({
       </div>
 
       {/* Right: Community Card */}
-      <div className="flex flex-1 items-center justify-center">
+      <div className="flex flex-1 items-start justify-center overflow-y-auto py-4">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}

@@ -207,34 +207,19 @@ export default function Home() {
         <WhiteboardBackground />
 
         {/* Header - centered */}
-        <div className="relative z-20 mb-2 mt-16 shrink-0 text-center">
-          <h2 className="text-3xl font-bold text-white">
+        <div className="relative z-20 mb-4 mt-4 shrink-0 text-center px-4">
+          <h2 className="text-2xl lg:text-3xl font-bold text-white">
             Where Your Customers Pay Attention
           </h2>
-          <p className="mx-auto mt-2 max-w-2xl text-slate-400">
+          <p className="mx-auto mt-2 max-w-2xl text-sm lg:text-base text-slate-400">
             These are the communities and channels where your ideal customers
             are most engaged. Focus your marketing efforts here to maximize
             reach and improve conversion rates.
           </p>
-
-          {/* Content and trend insights feedback button */}
-          <div className="mt-6 flex justify-center">
-            <FeedbackButton
-              question="Feature in development. To make it as effective as possible, what specifically would you like to see? Is it the content customers are engaging with, emerging trends, key talking points and community focuses etc.? If possible, quantify how this would benefit you or what problem it would solve, i.e. this would inform content and save 4 hours per week in manual research"
-              buttonText="See content and trend insights instead"
-              onClick={() => {
-                // No navigation - just collect feedback
-              }}
-              answerType="text"
-              className="group relative overflow-hidden rounded-xl border-2 border-emerald-500/30 bg-emerald-900/20 px-6 py-3 text-base font-medium text-emerald-400 transition-all hover:border-emerald-500/50 hover:bg-emerald-900/30 hover:text-emerald-300"
-            >
-              <>See content and trend insights instead</>
-            </FeedbackButton>
-          </div>
         </div>
 
         {/* Card Stack - takes remaining space */}
-        <div className="relative z-10 mt-6 min-h-0 flex-1 overflow-y-auto">
+        <div className="relative z-10 mt-4 min-h-0 flex-1 overflow-y-auto">
           {generateCommunities.isPending ? (
             <div className="flex h-full items-center justify-center">
               <GeneratingMessage message="Finding where your customers pay attention..." />
@@ -263,8 +248,22 @@ export default function Home() {
           )}
         </div>
 
-        {/* Complete Demo Button */}
-        <div className="relative z-20 pb-8 pt-4 flex shrink-0 justify-center">
+        {/* Bottom Buttons */}
+        <div className="relative z-20 pb-6 pt-3 flex shrink-0 justify-center gap-3 px-4">
+          {/* Content and trend insights feedback button */}
+          <FeedbackButton
+            question="Feature in development. To make it as effective as possible, what specifically would you like to see? Is it the content customers are engaging with, emerging trends, key talking points and community focuses etc.? If possible, quantify how this would benefit you or what problem it would solve, i.e. this would inform content and save 4 hours per week in manual research"
+            buttonText="See content and trend insights instead"
+            onClick={() => {
+              // No navigation - just collect feedback
+            }}
+            answerType="text"
+            className="group relative overflow-hidden rounded-xl border-2 border-emerald-500/30 bg-emerald-900/20 px-4 lg:px-6 py-3 text-sm lg:text-base font-medium text-emerald-400 transition-all hover:border-emerald-500/50 hover:bg-emerald-900/30 hover:text-emerald-300"
+          >
+            <>See content and trend insights instead</>
+          </FeedbackButton>
+
+          {/* Complete Demo Button */}
           <button
             onClick={() => scrollToCard(3)}
             disabled={!communities}
@@ -272,7 +271,7 @@ export default function Home() {
               e.currentTarget.setAttribute('data-hover', 'true')
             }
             onMouseLeave={(e) => e.currentTarget.removeAttribute('data-hover')}
-            className="group relative overflow-hidden rounded-xl border border-white/10 px-8 py-4 text-base font-medium text-slate-300 transition-all hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+            className="group relative overflow-hidden rounded-xl border border-white/10 px-6 lg:px-8 py-3 text-sm lg:text-base font-medium text-slate-300 transition-all hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {/* Gradient background on hover */}
             <div

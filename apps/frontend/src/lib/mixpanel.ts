@@ -28,7 +28,9 @@ class MixpanelService {
       mixpanel.init(process.env.NEXT_PUBLIC_MIXPANEL_TOKEN ?? '', {
         persistence: 'cookie',
         track_pageview: false,
-        api_host: process.env.NEXT_PUBLIC_MIXPANEL_API_HOST ?? '',
+        api_host:
+          process.env.NEXT_PUBLIC_MIXPANEL_API_HOST ??
+          'https://api.mixpanel.com',
         debug: process.env.NODE_ENV === 'development',
         record_sessions_percent: 100,
         ignore_dnt: true,
