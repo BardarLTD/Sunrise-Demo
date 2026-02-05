@@ -18,7 +18,12 @@
       "Bash(xargs:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(pnpm run dev:*)",
+      "Bash(lsof:*)",
+      "Bash(ls:*)",
+      "Bash(pnpm -w run format:*)",
+      "Bash(pkill:*)"
     ],
     "deny": [],
     "ask": []

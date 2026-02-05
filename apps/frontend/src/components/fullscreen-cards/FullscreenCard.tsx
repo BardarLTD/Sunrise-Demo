@@ -1,11 +1,8 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { CosmicBackground } from './CosmicBackground';
-
-type ColorTheme = 'purple' | 'grey' | 'emerald' | 'blue' | 'rose';
+import { WhiteboardBackground } from './WhiteboardBackground';
 
 interface FullscreenCardProps {
   title?: string;
@@ -13,9 +10,7 @@ interface FullscreenCardProps {
   id: string;
   onNext?: () => void;
   showNextButton?: boolean;
-  theme?: ColorTheme;
   centerContent?: boolean;
-  backgroundImage?: string;
 }
 
 export function FullscreenCard({
@@ -24,29 +19,14 @@ export function FullscreenCard({
   id,
   onNext,
   showNextButton = true,
-  theme,
   centerContent = false,
-  backgroundImage,
 }: FullscreenCardProps) {
-  const hasCosmic = !!theme;
-
   return (
-    <motion.section
+    <section
       id={id}
-      className={`relative flex h-screen snap-start flex-col overflow-hidden p-12 ${
-        hasCosmic ? '' : 'bg-white shadow-sm'
-      }`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true, amount: 0.3 }}
+      className="relative flex h-screen snap-start flex-col overflow-hidden p-12"
     >
-      {hasCosmic && (
-        <CosmicBackground
-          theme={theme}
-          {...(backgroundImage ? { backgroundImage } : {})}
-        />
-      )}
+      <WhiteboardBackground />
 
       <div
         className={`relative z-10 flex flex-1 flex-col ${
@@ -55,7 +35,7 @@ export function FullscreenCard({
       >
         {title && (
           <h2
-            className={`mb-8 text-3xl font-bold ${hasCosmic ? 'text-white' : ''} ${
+            className={`mb-8 text-3xl font-bold text-white ${
               centerContent ? 'absolute left-0 top-0' : ''
             }`}
           >
@@ -78,18 +58,14 @@ export function FullscreenCard({
             <Button
               onClick={onNext}
               size="lg"
-              variant={hasCosmic ? 'secondary' : 'default'}
-              className={
-                hasCosmic
-                  ? 'border-white/20 bg-white/10 text-white backdrop-blur hover:bg-white/20'
-                  : ''
-              }
+              variant="secondary"
+              className="border-white/20 bg-white/10 text-white backdrop-blur hover:bg-white/20"
             >
               Continue
             </Button>
           </div>
         )}
       </div>
-    </motion.section>
+    </section>
   );
 }

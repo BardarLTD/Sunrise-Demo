@@ -166,7 +166,7 @@ export function CommunityCard({ community, isBestValue }: CommunityCardProps) {
   );
 
   return (
-    <div className="relative flex h-full w-full flex-col overflow-hidden rounded-3xl border border-white/20 bg-gradient-to-b from-slate-900/95 to-slate-950/95 shadow-2xl backdrop-blur-xl">
+    <div className="relative flex h-full w-full overflow-hidden rounded-3xl border border-white/10 bg-[#232323] shadow-2xl">
       {/* Best Value Badge */}
       {isBestValue && (
         <motion.div
@@ -180,41 +180,48 @@ export function CommunityCard({ community, isBestValue }: CommunityCardProps) {
         </motion.div>
       )}
 
-      {/* Header Section */}
-      <div className="shrink-0 p-5 pb-0">
-        <div className="flex gap-4">
-          {/* Community Image */}
-          <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border-2 border-white/10 shadow-lg">
-            <Image
-              src={community.image}
-              alt={community.name}
-              fill
-              className="object-cover"
-              sizes="80px"
-            />
-          </div>
-
-          {/* Title and Platform */}
-          <div className="flex flex-1 flex-col justify-center">
-            <div className="flex items-center gap-2">
-              <div
-                className={`flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br ${platformGradient} shadow-md`}
-              >
-                <PlatformIcon className="h-3.5 w-3.5 text-white" />
-              </div>
-              <span className="text-xs font-medium text-slate-400">
-                {platformLabels[community.platform]}
-              </span>
-            </div>
-            <h3 className="mt-1 text-xl font-bold text-white">
-              {community.name}
-            </h3>
-            <p className="text-sm text-slate-400">@{community.handle}</p>
-          </div>
+      {/* Left Side - Header Section */}
+      <div className="flex w-2/5 shrink-0 flex-col p-6">
+        {/* Community Image */}
+        <div className="relative mb-4 h-32 w-32 shrink-0 overflow-hidden rounded-2xl border-2 border-white/10 shadow-lg">
+          <Image
+            src={community.image}
+            alt={community.name}
+            fill
+            className="object-cover"
+            sizes="128px"
+          />
         </div>
 
+        {/* Platform */}
+        <div className="mb-2 flex items-center gap-2">
+          <div
+            className={`flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br ${platformGradient} shadow-md`}
+          >
+            <PlatformIcon className="h-3.5 w-3.5 text-white" />
+          </div>
+          <span className="text-xs font-medium text-slate-400">
+            {platformLabels[community.platform]}
+          </span>
+        </div>
+
+        {/* Title */}
+        <div className="flex items-center gap-2">
+          <h3 className="text-2xl font-bold text-white">{community.name}</h3>
+          <a
+            href={community.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sm font-medium text-blue-400 transition-colors hover:text-blue-300"
+            title="View channel"
+          >
+            View channel <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        </div>
+        <p className="mt-1 text-sm text-slate-400">@{community.handle}</p>
+
         {/* Description */}
-        <p className="mt-3 text-sm leading-relaxed text-slate-300">
+        <p className="mt-4 text-sm leading-relaxed text-slate-300">
           {community.description}
         </p>
 
@@ -223,24 +230,24 @@ export function CommunityCard({ community, isBestValue }: CommunityCardProps) {
           href={community.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 transition-colors hover:text-emerald-300"
+          className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-slate-300 transition-colors hover:text-white"
         >
           Visit Community <ExternalLink className="h-3.5 w-3.5" />
         </a>
       </div>
 
-      {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto px-5 py-4 scrollbar-none">
+      {/* Right Side - Scrollable Content */}
+      <div className="flex flex-1 flex-col overflow-y-auto border-l border-white/5 p-6 scrollbar-none">
         {/* Target Match - Hero Metric */}
-        <div className="mb-4 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 p-4">
+        <div className="mb-4 rounded-lg bg-emerald-500/10 p-4 ring-1 ring-emerald-500/20">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-emerald-300">
-                Target Audience Match
+                Target Audience Following
               </p>
-              <p className="mt-0.5 text-xs text-slate-400">
-                {community.targetCustomerEngagement.count} of your target
-                customers are active here
+              <p className="mt-0.5 max-w-xs text-sm text-slate-400">
+                Percentage of this community&apos;s audience that are your
+                target customers
               </p>
             </div>
             <div className="text-right">
@@ -256,7 +263,7 @@ export function CommunityCard({ community, isBestValue }: CommunityCardProps) {
           </div>
           <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-700">
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-400"
+              className="h-full rounded-full bg-emerald-400"
               initial={{ width: 0 }}
               animate={{
                 width: `${community.targetCustomerEngagement.alignmentPercentage}%`,
@@ -268,30 +275,30 @@ export function CommunityCard({ community, isBestValue }: CommunityCardProps) {
 
         {/* Stats Grid */}
         <div className="mb-4 grid grid-cols-2 gap-3">
-          <div className="rounded-xl bg-white/5 p-3">
+          <div className="rounded-lg bg-white/10 p-3">
             <div className="flex items-center gap-2">
-              <Users className="h-4 w-4 text-emerald-400" />
+              <Users className="h-4 w-4 text-slate-400" />
               <span className="text-xs text-slate-400">{audienceLabel}</span>
             </div>
             <p className="mt-1 text-xl font-bold text-white">
               {formatNumber(audienceSize)}
             </p>
           </div>
-          <div className="rounded-xl bg-white/5 p-3">
+          <div className="rounded-lg bg-white/10 p-3">
             <div className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-blue-400" />
+              <TrendingUp className="h-4 w-4 text-slate-400" />
               <span className="text-xs text-slate-400">Engagement Rate</span>
             </div>
             <p className="mt-1 text-xl font-bold text-white">
               {community.stats.engagementRate}%
             </p>
           </div>
-          <div className="rounded-xl bg-white/5 p-3">
+          <div className="rounded-lg bg-white/10 p-3">
             <div className="flex items-center gap-2">
               {community.stats.avgViews ? (
-                <Eye className="h-4 w-4 text-purple-400" />
+                <Eye className="h-4 w-4 text-slate-400" />
               ) : (
-                <Heart className="h-4 w-4 text-pink-400" />
+                <Heart className="h-4 w-4 text-slate-400" />
               )}
               <span className="text-xs text-slate-400">{engagementLabel}</span>
             </div>
@@ -299,9 +306,9 @@ export function CommunityCard({ community, isBestValue }: CommunityCardProps) {
               {formatNumber(avgEngagement)}
             </p>
           </div>
-          <div className="rounded-xl bg-white/5 p-3">
+          <div className="rounded-lg bg-white/10 p-3">
             <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-amber-400" />
+              <Calendar className="h-4 w-4 text-slate-400" />
               <span className="text-xs text-slate-400">Posting</span>
             </div>
             <p className="mt-1 text-xl font-bold text-white">{postFrequency}</p>
@@ -310,7 +317,7 @@ export function CommunityCard({ community, isBestValue }: CommunityCardProps) {
         </div>
 
         {/* Audience Sentiment */}
-        <div className="mb-4 rounded-xl bg-white/5 p-4">
+        <div className="mb-4 rounded-lg bg-white/10 p-4">
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium text-slate-300">
               Audience Sentiment
@@ -381,7 +388,7 @@ export function CommunityCard({ community, isBestValue }: CommunityCardProps) {
               {customersWithQuotes.slice(0, 2).map((customer) => (
                 <div
                   key={customer.customerId}
-                  className="rounded-xl bg-white/5 p-3"
+                  className="rounded-lg bg-white/10 p-3"
                 >
                   <div className="flex gap-3">
                     <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full ring-2 ring-emerald-500/30">
@@ -394,10 +401,10 @@ export function CommunityCard({ community, isBestValue }: CommunityCardProps) {
                       />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium text-white">
+                      <p className="text-sm font-medium text-slate-400">
                         {customer.customerName}
                       </p>
-                      <p className="mt-0.5 text-sm italic text-slate-400">
+                      <p className="mt-0.5 text-sm italic text-white">
                         &quot;{customer.quote}&quot;
                       </p>
                       {customer.likes && (
@@ -426,10 +433,10 @@ export function CommunityCard({ community, isBestValue }: CommunityCardProps) {
                 .map((voice, index) => (
                   <div
                     key={index}
-                    className="flex gap-2 rounded-xl bg-white/5 p-3"
+                    className="flex gap-2 rounded-lg bg-white/10 p-3"
                   >
                     <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" />
-                    <p className="text-sm italic text-slate-400">
+                    <p className="text-sm italic text-white">
                       &quot;{voice}&quot;
                     </p>
                   </div>
@@ -437,13 +444,6 @@ export function CommunityCard({ community, isBestValue }: CommunityCardProps) {
             </div>
           </div>
         )}
-      </div>
-
-      {/* Footer */}
-      <div className="shrink-0 border-t border-white/10 px-5 py-3">
-        <p className="text-center text-xs text-slate-500">
-          Swipe or use arrows to browse communities
-        </p>
       </div>
     </div>
   );

@@ -89,7 +89,9 @@ export default function Home() {
               void (async () => {
                 setPersona(message);
                 setHasGeneratedCommunities(false);
-                scrollToCard(1);
+
+                // Use setTimeout to ensure scroll happens after React updates
+                setTimeout(() => scrollToCard(1), 0);
 
                 try {
                   const generatedCustomers =
@@ -107,15 +109,15 @@ export default function Home() {
 
           {/* Discover optimum target feedback button */}
           <FeedbackButton
-            question="This feature is in development. To help us build the best product, tell us what would you like to learn about your target customer, and how this would impact your marketing activities"
-            buttonText="Discover optimum target"
+            question="*This feature is in development* To help us make it as powerful as possible, can you tell us a. the product you sell and b. what details you want in your customer profile?"
+            buttonText="Don't know your target customer? Discover with data"
             onClick={() => {
               // No navigation - just collect feedback
             }}
             answerType="text"
             className="group relative overflow-hidden rounded-xl border-2 border-emerald-500/30 bg-emerald-900/20 px-6 py-3 text-base font-medium text-emerald-400 transition-all hover:border-emerald-500/50 hover:bg-emerald-900/30 hover:text-emerald-300"
           >
-            <>Discover optimum target</>
+            <>Don&apos;t know your target customer? Discover with data</>
           </FeedbackButton>
         </div>
       </FullscreenCard>
@@ -143,12 +145,6 @@ export default function Home() {
               </button>{' '}
               to refine your description.
             </p>
-            <div className="mt-2 inline-block rounded-lg bg-emerald-900/30 px-4 py-2">
-              <span className="text-sm font-medium text-emerald-400">
-                <span className="font-bold">6022</span> real people analysed in{' '}
-                <span className="font-bold">across five platforms.</span>
-              </span>
-            </div>
           </div>
 
           {/* Customer Control Panel / Carousel */}
@@ -175,7 +171,7 @@ export default function Home() {
                 customers={customers}
                 onViewCommunities={() => {
                   void (async () => {
-                    scrollToCard(2);
+                    setTimeout(() => scrollToCard(2), 0);
                     if (!hasGeneratedCommunities && persona && customers) {
                       try {
                         const generatedCommunities =
@@ -200,48 +196,6 @@ export default function Home() {
                 </p>
               </div>
             )}
-          </div>
-
-          {/* Analyse CTA Button */}
-          <div className="mt-4 flex shrink-0 justify-center">
-            <button
-              onClick={() => {
-                void (async () => {
-                  scrollToCard(2);
-                  if (!hasGeneratedCommunities && persona && customers) {
-                    try {
-                      const generatedCommunities =
-                        await generateCommunities.mutateAsync({
-                          persona,
-                          customers,
-                          count: 5,
-                        });
-                      setCommunities(generatedCommunities);
-                      setHasGeneratedCommunities(true);
-                    } catch (error) {
-                      console.error('Failed to generate communities:', error);
-                    }
-                  }
-                })();
-              }}
-              disabled={!customers || generateCustomers.isPending}
-              onMouseEnter={(e) =>
-                e.currentTarget.setAttribute('data-hover', 'true')
-              }
-              onMouseLeave={(e) =>
-                e.currentTarget.removeAttribute('data-hover')
-              }
-              className="group relative overflow-hidden rounded-xl border border-white/10 px-8 py-4 text-base font-medium text-slate-300 transition-all hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {/* Gradient background on hover */}
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-40"
-                style={{ backgroundImage: 'url(/gradient-bg.png)' }}
-              />
-              {/* Solid background */}
-              <div className="absolute inset-0 bg-[#232323] opacity-100 transition-opacity duration-500 ease-out group-hover:opacity-70" />
-              <span className="relative z-10">Analyse Customers</span>
-            </button>
           </div>
         </div>
       </section>
@@ -280,7 +234,7 @@ export default function Home() {
         </div>
 
         {/* Card Stack - takes remaining space */}
-        <div className="relative z-10 mt-12 min-h-0 flex-1">
+        <div className="relative z-10 mt-6 min-h-0 flex-1 overflow-y-auto">
           {generateCommunities.isPending ? (
             <div className="flex h-full items-center justify-center">
               <GeneratingMessage message="Finding where your customers pay attention..." />
@@ -343,14 +297,14 @@ export default function Home() {
             {/* Sign-up Box */}
             <div className="rounded-2xl border border-white/10 bg-[#1a1a1a]/80 backdrop-blur-sm p-8 text-center">
               <h2 className="text-3xl font-bold text-white mb-6">
-                Ready to Find Your Audience?
+                Ready to Reach Your Customers?
               </h2>
               <p className="text-slate-300 text-lg leading-relaxed mb-8">
                 If what we&apos;re building seems like it would add value for
-                you, sign up as a presale customer. You won&apos;t be charged
+                you, sign up as an early adopter. You won&apos;t be charged
                 until after Talentsheet is launched, and you&apos;ve had a two
-                week free trial. Additionally, you&apos;ll get beta access
-                before then.
+                week free trial. Additionally, you&apos;ll get extensive beta
+                access and testing before then.
               </p>
 
               {/* Pricing Section */}
@@ -371,7 +325,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 {/* Sign Up Button */}
                 <a
-                  href="YOUR_STRIPE_LINK_HERE"
+                  href="https://buy.stripe.com/6oUaEZbYv7pLf8j8Bs9R609"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative overflow-hidden rounded-xl bg-emerald-600 px-8 py-4 text-base font-medium text-white transition-all hover:bg-emerald-500"

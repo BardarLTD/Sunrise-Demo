@@ -121,9 +121,9 @@ export function CommunityCardStack({ communities }: CommunityCardStackProps) {
   if (!currentCommunity) return null;
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center px-4 pb-4">
+    <div className="relative flex h-full w-full flex-col items-center justify-center pb-4">
       {/* Card Stack */}
-      <div className="relative min-h-0 w-full max-w-xl flex-1">
+      <div className="relative h-[700px] w-full max-w-5xl px-4">
         {/* Background cards for stack effect */}
         {communities.slice(0, 3).map((_, index) => {
           if (index === 0) return null;
@@ -186,7 +186,7 @@ export function CommunityCardStack({ communities }: CommunityCardStackProps) {
           variant="outline"
           size="icon"
           onClick={goToPrev}
-          className="h-12 w-12 rounded-full border-emerald-500/50 bg-emerald-950/50 text-white backdrop-blur hover:bg-emerald-800/50"
+          className="h-12 w-12 rounded-full border-slate-500/50 bg-slate-950/50 text-white backdrop-blur hover:bg-slate-800/50"
         >
           <ChevronLeft className="h-6 w-6" />
         </Button>
@@ -202,8 +202,8 @@ export function CommunityCardStack({ communities }: CommunityCardStackProps) {
               }}
               className={`h-2.5 rounded-full transition-all ${
                 index === currentIndex
-                  ? 'w-8 bg-emerald-400'
-                  : 'w-2.5 bg-emerald-600/50 hover:bg-emerald-500/70'
+                  ? 'w-8 bg-slate-400'
+                  : 'w-2.5 bg-slate-600/50 hover:bg-slate-500/70'
               }`}
             />
           ))}
@@ -213,7 +213,7 @@ export function CommunityCardStack({ communities }: CommunityCardStackProps) {
           variant="outline"
           size="icon"
           onClick={goToNext}
-          className="h-12 w-12 rounded-full border-emerald-500/50 bg-emerald-950/50 text-white backdrop-blur hover:bg-emerald-800/50"
+          className="h-12 w-12 rounded-full border-slate-500/50 bg-slate-950/50 text-white backdrop-blur hover:bg-slate-800/50"
         >
           <ChevronRight className="h-6 w-6" />
         </Button>

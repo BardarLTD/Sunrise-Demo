@@ -1,13 +1,5 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001';
-
-interface HelloResponse {
-  message: string;
-}
-
-interface HealthResponse {
-  status: string;
-  timestamp: string;
-}
+import type { CustomerProfile } from '@/types/customer';
+import type { CommunityProfile } from '@/types/community';
 
 interface CustomerSocials {
   twitter?: string;
@@ -27,6 +19,8 @@ interface Customer {
   location: string;
   interests: string[];
   socials: CustomerSocials;
+  totalConnections: number;
+  oldestProfileYears: number;
 }
 
 interface CustomersResponse {
@@ -101,88 +95,6 @@ interface CommunitiesResponse {
 }
 
 class Api {
-  private baseUrl: string;
-
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
-  }
-
-  private async get<T>(endpoint: string): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
-    }
-
-    return response.json() as Promise<T>;
-  }
-
-  protected async post<T>(endpoint: string, data: unknown): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
-    }
-
-    return response.json() as Promise<T>;
-  }
-
-  protected async patch<T>(endpoint: string, data: unknown): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
-    }
-
-    return response.json() as Promise<T>;
-  }
-
-  protected async delete(endpoint: string): Promise<void> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
-    }
-  }
-
-  // ============================================
-  // Hello
-  // ============================================
-
-  getHello(): Promise<HelloResponse> {
-    return this.get<HelloResponse>('/api/hello');
-  }
-
-  // ============================================
-  // Health
-  // ============================================
-
-  getHealth(): Promise<HealthResponse> {
-    return this.get<HealthResponse>('/health');
-  }
-
   // ============================================
   // Customers (from public folder)
   // ============================================
@@ -206,9 +118,66 @@ class Api {
     }
     return response.json() as Promise<CommunitiesResponse>;
   }
+
+  // ============================================
+  // AI-Generated Content
+  // ============================================
+
+  async generateCustomers(
+    persona: string,
+    count?: number,
+  ): Promise<CustomerProfile[]> {
+    const response = await fetch('/api/customers/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ persona, count }),
+    });
+
+    if (!response.ok) {
+      const errorData = (await response.json().catch(() => ({}))) as {
+        error?: string;
+      };
+      throw new Error(
+        errorData.error ||
+          `Failed to generate customers: ${response.statusText}`,
+      );
+    }
+
+    const data = (await response.json()) as { customers: CustomerProfile[] };
+    return data.customers;
+  }
+
+  async generateCommunities(
+    persona: string,
+    customers: CustomerProfile[],
+    count?: number,
+  ): Promise<CommunityProfile[]> {
+    const response = await fetch('/api/communities/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ persona, customers, count }),
+    });
+
+    if (!response.ok) {
+      const errorData = (await response.json().catch(() => ({}))) as {
+        error?: string;
+      };
+      throw new Error(
+        errorData.error ||
+          `Failed to generate communities: ${response.statusText}`,
+      );
+    }
+
+    const data = (await response.json()) as { communities: CommunityProfile[] };
+    return data.communities;
+  }
 }
 
-export const API = new Api(API_BASE_URL);
+export const API = new Api();
 
 export type {
   AudienceSentiment,
@@ -219,7 +188,5 @@ export type {
   CustomerEngagement,
   CustomerSocials,
   CustomersResponse,
-  HealthResponse,
-  HelloResponse,
   TargetCustomerEngagement,
 };

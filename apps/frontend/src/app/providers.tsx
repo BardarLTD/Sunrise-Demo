@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 import type { ReactNode } from 'react';
+import { PersonaProvider } from '@/contexts/PersonaContext';
 
 interface ProvidersProps {
   children: ReactNode;
@@ -21,6 +22,8 @@ export function Providers({ children }: ProvidersProps) {
   );
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <PersonaProvider>{children}</PersonaProvider>
+    </QueryClientProvider>
   );
 }

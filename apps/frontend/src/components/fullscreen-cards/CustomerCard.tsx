@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import {
   FaTwitter,
   FaLinkedin,
@@ -27,105 +26,130 @@ const socialIcons = {
 } as const;
 
 export function CustomerCard({ customer, isActive }: CustomerCardProps) {
+  // Helper to check if interest is relevant to the prompt
+  const isRelevantInterest = (interest: string) => {
+    const relevantKeywords = [
+      'productivity',
+      'wellness',
+      'health',
+      'fitness',
+      'yoga',
+      'tech',
+      'gadgets',
+      'gadget',
+    ];
+    return relevantKeywords.some((keyword) =>
+      interest.toLowerCase().includes(keyword),
+    );
+  };
+
   return (
-    <motion.div
-      className="relative flex h-[480px] w-[320px] shrink-0 flex-col overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 shadow-2xl"
-      animate={{
-        scale: isActive ? 1.1 : 0.85,
-        opacity: isActive ? 1 : 0.6,
-        rotateY: isActive ? 0 : -5,
-      }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
-      style={{
-        boxShadow: isActive
-          ? '0 0 60px rgba(147, 51, 234, 0.5), 0 0 100px rgba(147, 51, 234, 0.3)'
-          : '0 10px 40px rgba(0, 0, 0, 0.3)',
-      }}
+    <div
+      className={`relative flex h-[380px] w-[820px] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-[#232323] shadow-2xl transition-all duration-300 ${
+        isActive ? 'scale-105 opacity-100' : 'scale-95 opacity-60'
+      }`}
     >
-      {/* Holographic shine effect */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5" />
-
-      {/* Card border glow */}
-      <div className="pointer-events-none absolute inset-0 rounded-2xl border-2 border-purple-500/30" />
-
-      {/* Profile Image */}
-      <div className="relative mx-auto mt-6 h-28 w-28 overflow-hidden rounded-full border-4 border-purple-500/50 shadow-lg">
+      {/* Left: Profile Image */}
+      <div className="relative h-full w-[320px] shrink-0 overflow-hidden">
         <Image
           src={customer.image}
           alt={customer.name}
           fill
           className="object-cover"
-          sizes="112px"
+          sizes="320px"
         />
       </div>
 
-      {/* Name */}
-      <h3 className="mt-4 text-center text-xl font-bold text-white">
-        {customer.name}
-      </h3>
+      {/* Right: Content */}
+      <div className="flex flex-1 flex-col p-6">
+        {/* Name */}
+        <h3 className="text-3xl font-bold text-white">{customer.name}</h3>
 
-      {/* Social Links */}
-      <div className="mt-2 flex justify-center gap-3">
-        {(Object.entries(customer.socials) as [SocialPlatform, string][]).map(
-          ([platform, url]) => {
-            const Icon = socialIcons[platform];
-            if (!Icon || !url) return null;
-            return (
-              <a
-                key={platform}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-purple-300 transition-colors hover:text-white"
-              >
-                <Icon size={18} />
-              </a>
-            );
-          },
-        )}
-      </div>
+        {/* Social Links */}
+        <div className="mt-3 flex gap-3">
+          {(Object.entries(customer.socials) as [SocialPlatform, string][]).map(
+            ([platform, url]) => {
+              const Icon = socialIcons[platform];
+              if (!Icon || !url) return null;
+              return (
+                <a
+                  key={platform}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-300 transition-colors hover:text-white"
+                >
+                  <Icon size={20} />
+                </a>
+              );
+            },
+          )}
+        </div>
 
-      {/* Stats Grid */}
-      <div className="mt-4 grid grid-cols-2 gap-2 px-4">
-        <div className="rounded-lg bg-white/5 px-3 py-2 text-center">
-          <p className="text-xs text-purple-300">Age</p>
-          <p className="text-sm font-semibold text-white">
-            {customer.ageRange}
-          </p>
+        {/* Connections & Oldest Profile */}
+        <div className="mt-3 text-sm text-slate-300">
+          <span className="font-semibold">{customer.totalConnections}</span>{' '}
+          total connections <span className="text-slate-500">•</span> Oldest
+          profile:{' '}
+          <span className="font-semibold">{customer.oldestProfileYears}</span>{' '}
+          yrs
         </div>
-        <div className="rounded-lg bg-white/5 px-3 py-2 text-center">
-          <p className="text-xs text-purple-300">Gender</p>
-          <p className="text-sm font-semibold text-white">{customer.gender}</p>
-        </div>
-        <div className="col-span-2 rounded-lg bg-white/5 px-3 py-2 text-center">
-          <p className="text-xs text-purple-300">Salary Range</p>
-          <p className="text-sm font-semibold text-white">
-            {customer.salaryRange}
-          </p>
-        </div>
-      </div>
 
-      {/* Interests */}
-      <div className="mt-4 px-4">
-        <p className="mb-2 text-xs text-purple-300">Top Interests</p>
-        <div className="flex flex-wrap gap-1.5">
-          {customer.interests.slice(0, 4).map((interest) => (
-            <span
-              key={interest}
-              className="rounded-full bg-purple-500/30 px-2.5 py-1 text-xs font-medium text-purple-100"
-            >
-              {interest}
-            </span>
-          ))}
+        {/* Demographics */}
+        <div className="mt-4">
+          <h4 className="mb-2 text-sm font-semibold text-white">
+            Demographics
+          </h4>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="rounded-lg bg-emerald-500/10 px-3 py-2 ring-1 ring-emerald-500/20">
+              <p className="text-xs text-slate-400">Age</p>
+              <p className="text-sm font-semibold text-white">
+                {customer.ageRange}
+              </p>
+            </div>
+            <div className="rounded-lg bg-white/10 px-3 py-2">
+              <p className="text-xs text-slate-400">Gender</p>
+              <p className="text-sm font-semibold text-white">
+                {customer.gender}
+              </p>
+            </div>
+            <div className="rounded-lg bg-emerald-500/10 px-3 py-2 ring-1 ring-emerald-500/20">
+              <p className="text-xs text-slate-400">Salary</p>
+              <p className="text-sm font-semibold text-white">
+                {customer.salaryRange}
+              </p>
+            </div>
+            <div className="rounded-lg bg-emerald-500/10 px-3 py-2 ring-1 ring-emerald-500/20">
+              <p className="text-xs text-slate-400">Location</p>
+              <p className="text-sm font-semibold text-white">
+                {customer.location}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Interests */}
+        <div className="mt-4">
+          <h4 className="mb-2 text-sm font-semibold text-white">Interests</h4>
+          <div className="flex flex-wrap gap-2">
+            {customer.interests.slice(0, 5).map((interest) => {
+              const isRelevant = isRelevantInterest(interest);
+              return (
+                <span
+                  key={interest}
+                  className={`rounded-full px-3 py-1.5 text-sm font-medium ${
+                    isRelevant
+                      ? 'bg-emerald-500/20 text-emerald-200 ring-1 ring-emerald-500/30'
+                      : 'bg-white/20 text-slate-200'
+                  }`}
+                >
+                  {interest}
+                </span>
+              );
+            })}
+          </div>
         </div>
       </div>
-
-      {/* Location */}
-      <div className="mt-auto px-4 pb-4">
-        <p className="text-center text-xs text-purple-400">
-          {customer.location}
-        </p>
-      </div>
-    </motion.div>
+    </div>
   );
 }

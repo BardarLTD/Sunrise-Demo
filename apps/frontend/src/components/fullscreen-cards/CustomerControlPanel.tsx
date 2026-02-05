@@ -280,7 +280,7 @@ export function CustomerControlPanel({
                 {/* Contact Customers Button */}
                 <div className="mt-4">
                   <FeedbackButton
-                    question="How would you like to use the customer list? Email outreach, Social DMs, Survey? some other creative idea? This will help us build the best possible tooling for this data. Assume we have all possible contact data. Please try and quantify how this would impact your business in numbers if possible (i.e. would save x hours finding and building mailing list)."
+                    question="*This feature is under development*. To help us create the best possible experience, please tell us a. how you would like to contact customers (i.e. automated marketing DM, email survey etc.) and b. what material impact this could have on your marketing?"
                     buttonText="Contact Customers"
                     onClick={() => {
                       // No navigation - just collect feedback

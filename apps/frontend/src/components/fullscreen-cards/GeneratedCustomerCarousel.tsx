@@ -3,15 +3,17 @@
 import { useCallback, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import type { Customer } from '@/api/api';
-import { CustomerCard } from './CustomerCard';
+import type { CustomerProfile } from '@/types/customer';
+import { GeneratedCustomerCard } from './GeneratedCustomerCard';
 import { Button } from '@/components/ui/button';
 
-interface CustomerCarouselProps {
-  customers: Customer[];
+interface GeneratedCustomerCarouselProps {
+  customers: CustomerProfile[];
 }
 
-export function CustomerCarousel({ customers }: CustomerCarouselProps) {
+export function GeneratedCustomerCarousel({
+  customers,
+}: GeneratedCustomerCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [direction, setDirection] = useState(0);
@@ -40,7 +42,11 @@ export function CustomerCarousel({ customers }: CustomerCarouselProps) {
   const getVisibleCards = () => {
     const visibleCount = 5;
     const halfVisible = Math.floor(visibleCount / 2);
-    const cards: { customer: Customer; position: number; key: string }[] = [];
+    const cards: {
+      customer: CustomerProfile;
+      position: number;
+      key: string;
+    }[] = [];
 
     for (let i = -halfVisible; i <= halfVisible; i++) {
       const index = (actualIndex + i + customers.length) % customers.length;
@@ -49,7 +55,7 @@ export function CustomerCarousel({ customers }: CustomerCarouselProps) {
         cards.push({
           customer,
           position: i,
-          key: String(customer.id),
+          key: customer.id,
         });
       }
     }
@@ -88,7 +94,10 @@ export function CustomerCarousel({ customers }: CustomerCarouselProps) {
               }}
               transition={{ duration: 0.4, ease: 'easeOut' }}
             >
-              <CustomerCard customer={customer} isActive={position === 0} />
+              <GeneratedCustomerCard
+                customer={customer}
+                isActive={position === 0}
+              />
             </motion.div>
           ))}
         </AnimatePresence>

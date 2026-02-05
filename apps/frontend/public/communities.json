@@ -78,11 +78,11 @@
     {
       "id": 2,
       "platform": "youtube",
-      "name": "Finance Frontier",
-      "handle": "FinanceFrontier",
-      "url": "https://youtube.com/@FinanceFrontier",
-      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=400&fit=crop",
-      "description": "Investment strategies, market analysis, and wealth building tips for professionals looking to grow their portfolio.",
+      "name": "Tech Gadget Lab",
+      "handle": "TechGadgetLab",
+      "url": "https://youtube.com/@TechGadgetLab",
+      "image": "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=400&h=400&fit=crop",
+      "description": "In-depth reviews of premium gadgets, productivity tools, and tech accessories for professionals who value quality and performance.",
       "stats": {
         "subscribers": 892000,
         "avgViews": 145000,
@@ -92,9 +92,9 @@
         "videosPerMonth": 8
       },
       "targetCustomerEngagement": {
-        "count": 3,
-        "percentage": 50.0,
-        "alignmentPercentage": 31.2,
+        "count": 5,
+        "percentage": 83.3,
+        "alignmentPercentage": 48.7,
         "alignmentHint": "This is the percentage of the community members that are in your target customer group"
       },
       "engagedCustomers": [
@@ -103,7 +103,7 @@
           "customerName": "Marcus Johnson",
           "customerImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
           "engagementType": "comment",
-          "quote": "This analysis on real estate REITs was exactly what I needed. Just adjusted my portfolio based on your insights.",
+          "quote": "Your wireless headphone comparison saved me hours of research. Went with your top pick and couldn't be happier!",
           "likes": 234,
           "timestamp": "2024-01-18T16:45:00Z"
         },
@@ -112,7 +112,7 @@
           "customerName": "David Kim",
           "customerImage": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
           "engagementType": "comment",
-          "quote": "20 years in tech investing and this is still one of the best breakdowns I've seen. Subscribed.",
+          "quote": "As a productivity nerd, this channel is gold. The smart home automation series changed my workflow completely.",
           "likes": 567,
           "timestamp": "2024-01-17T10:30:00Z"
         },
@@ -120,36 +120,54 @@
           "customerId": 6,
           "customerName": "James Williams",
           "customerImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+          "engagementType": "comment",
+          "quote": "Best tech reviews on YouTube. No fluff, just genuine testing and honest opinions.",
+          "likes": 189,
+          "timestamp": "2024-01-16T22:15:00Z"
+        },
+        {
+          "customerId": 1,
+          "customerName": "Sarah Chen",
+          "customerImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+          "engagementType": "comment",
+          "quote": "The standing desk comparison was exactly what I needed. Finally invested in the right setup!",
+          "likes": 312,
+          "timestamp": "2024-01-15T14:20:00Z"
+        },
+        {
+          "customerId": 3,
+          "customerName": "Emma Rodriguez",
+          "customerImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
           "engagementType": "like",
           "quote": null,
           "likes": null,
-          "timestamp": "2024-01-16T22:15:00Z"
+          "timestamp": "2024-01-14T09:30:00Z"
         }
       ],
       "audienceSentiment": {
-        "overall": "positive",
-        "score": 0.78,
+        "overall": "very_positive",
+        "score": 0.89,
         "breakdown": {
-          "positive": 68,
-          "neutral": 24,
-          "negative": 8
+          "positive": 81,
+          "neutral": 15,
+          "negative": 4
         },
-        "topThemes": ["educational", "data-driven", "trustworthy"],
+        "topThemes": ["thorough", "trustworthy", "premium-focused"],
         "sampleVoices": [
-          "Best financial education channel on YouTube, hands down.",
-          "Love the no-BS approach to market analysis.",
-          "Sometimes the content is too advanced for beginners like me."
+          "Finally a tech channel that focuses on quality over hype!",
+          "Love how you test products in real-world scenarios, not just spec sheets.",
+          "Sometimes wish there were more budget-friendly options featured."
         ]
       }
     },
     {
       "id": 3,
       "platform": "reddit",
-      "name": "r/SustainableLiving",
-      "handle": "SustainableLiving",
-      "url": "https://reddit.com/r/SustainableLiving",
-      "image": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=400&fit=crop",
-      "description": "Community dedicated to eco-friendly lifestyle choices, sustainable products, and environmental consciousness.",
+      "name": "r/DeskSetup",
+      "handle": "DeskSetup",
+      "url": "https://reddit.com/r/DeskSetup",
+      "image": "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=400&h=400&fit=crop",
+      "description": "Showcase and discuss workspace setups, ergonomic equipment, productivity tools, and desk aesthetics for professionals.",
       "stats": {
         "members": 1240000,
         "activeUsers": 8900,
@@ -159,9 +177,9 @@
         "postsPerDay": 45
       },
       "targetCustomerEngagement": {
-        "count": 3,
-        "percentage": 50.0,
-        "alignmentPercentage": 18.7,
+        "count": 5,
+        "percentage": 83.3,
+        "alignmentPercentage": 50.5,
         "alignmentHint": "This is the percentage of the community members that are in your target customer group"
       },
       "engagedCustomers": [
@@ -170,42 +188,60 @@
           "customerName": "Sarah Chen",
           "customerImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
           "engagementType": "comment",
-          "quote": "Just switched my entire household to the products recommended here. The impact calculator in the sidebar is amazing!",
+          "quote": "Just upgraded my home office based on recommendations here. The ergonomic chair was a game-changer for my productivity!",
           "likes": 342,
           "timestamp": "2024-01-20T08:15:00Z"
         },
         {
-          "customerId": 5,
-          "customerName": "Olivia Thompson",
-          "customerImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
+          "customerId": 4,
+          "customerName": "David Kim",
+          "customerImage": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
           "engagementType": "comment",
-          "quote": "This community has been transformative for my wellness journey. Sustainability and self-care go hand in hand.",
-          "likes": 189,
+          "quote": "This sub's cable management tips are incredible. Finally achieved that clean desk aesthetic I've been chasing.",
+          "likes": 567,
           "timestamp": "2024-01-19T15:30:00Z"
+        },
+        {
+          "customerId": 2,
+          "customerName": "Marcus Johnson",
+          "customerImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+          "engagementType": "comment",
+          "quote": "Love seeing the ultrawide monitor setups here. Convinced me to make the upgrade and it's transformed my workflow.",
+          "likes": 445,
+          "timestamp": "2024-01-18T12:00:00Z"
         },
         {
           "customerId": 6,
           "customerName": "James Williams",
           "customerImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
           "engagementType": "comment",
-          "quote": "As someone who spends a lot of time outdoors, this sub has completely changed how I think about my environmental footprint.",
-          "likes": 445,
-          "timestamp": "2024-01-18T12:00:00Z"
+          "quote": "Best community for desk setup inspiration. The lighting recommendations alone were worth joining.",
+          "likes": 289,
+          "timestamp": "2024-01-17T09:45:00Z"
+        },
+        {
+          "customerId": 3,
+          "customerName": "Emma Rodriguez",
+          "customerImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+          "engagementType": "like",
+          "quote": null,
+          "likes": null,
+          "timestamp": "2024-01-16T14:20:00Z"
         }
       ],
       "audienceSentiment": {
-        "overall": "positive",
-        "score": 0.85,
+        "overall": "very_positive",
+        "score": 0.88,
         "breakdown": {
-          "positive": 76,
-          "neutral": 18,
-          "negative": 6
+          "positive": 79,
+          "neutral": 16,
+          "negative": 5
         },
-        "topThemes": ["supportive", "informative", "action-oriented"],
+        "topThemes": ["inspiring", "helpful", "aesthetic"],
         "sampleVoices": [
-          "One of the most helpful and non-judgmental communities on Reddit.",
-          "Finally found my people! Every small change matters.",
-          "Some posts can be a bit preachy but overall great community."
+          "My favorite subreddit! So much inspiration for my workspace.",
+          "Great mix of budget and premium setups. Something for everyone.",
+          "Sometimes wish there was more focus on functionality over pure aesthetics."
         ]
       }
     },
@@ -278,11 +314,11 @@
     {
       "id": 5,
       "platform": "youtube",
-      "name": "Outdoor Adventures Pro",
-      "handle": "OutdoorAdventuresPro",
-      "url": "https://youtube.com/@OutdoorAdventuresPro",
-      "image": "https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=400&fit=crop",
-      "description": "Hiking trails, camping gear reviews, and outdoor photography tips for adventure enthusiasts.",
+      "name": "Peak Productivity Blueprint",
+      "handle": "PeakProductivityBlueprint",
+      "url": "https://youtube.com/@PeakProductivityBlueprint",
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=400&fit=crop",
+      "description": "Productivity systems, wellness habits, and time management strategies for ambitious professionals seeking work-life balance.",
       "stats": {
         "subscribers": 445000,
         "avgViews": 89000,
@@ -292,53 +328,71 @@
         "videosPerMonth": 6
       },
       "targetCustomerEngagement": {
-        "count": 3,
-        "percentage": 50.0,
-        "alignmentPercentage": 28.4,
+        "count": 5,
+        "percentage": 83.3,
+        "alignmentPercentage": 46.8,
         "alignmentHint": "This is the percentage of the community members that are in your target customer group"
       },
       "engagedCustomers": [
-        {
-          "customerId": 6,
-          "customerName": "James Williams",
-          "customerImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
-          "engagementType": "comment",
-          "quote": "Just did this trail last weekend based on your video. The photography tips were spot on!",
-          "likes": 234,
-          "timestamp": "2024-01-22T16:00:00Z"
-        },
         {
           "customerId": 4,
           "customerName": "David Kim",
           "customerImage": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
           "engagementType": "comment",
-          "quote": "Your gear reviews have saved me so much money. Quality content as always.",
-          "likes": 189,
-          "timestamp": "2024-01-21T11:30:00Z"
+          "quote": "Your time-blocking system completely transformed my work week. Finally feeling in control of my schedule!",
+          "likes": 567,
+          "timestamp": "2024-01-22T16:00:00Z"
         },
         {
           "customerId": 1,
           "customerName": "Sarah Chen",
           "customerImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+          "engagementType": "comment",
+          "quote": "The morning routine optimization video changed my life. Up at 5:30am now and crushing my goals!",
+          "likes": 389,
+          "timestamp": "2024-01-21T11:30:00Z"
+        },
+        {
+          "customerId": 5,
+          "customerName": "Olivia Thompson",
+          "customerImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
+          "engagementType": "comment",
+          "quote": "Love how you integrate wellness into productivity. It's not just about grinding, but sustainable high performance.",
+          "likes": 445,
+          "timestamp": "2024-01-20T09:15:00Z"
+        },
+        {
+          "customerId": 2,
+          "customerName": "Marcus Johnson",
+          "customerImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+          "engagementType": "comment",
+          "quote": "The productivity app stack comparison saved me hours of trial and error. Thanks for the honest reviews!",
+          "likes": 234,
+          "timestamp": "2024-01-19T14:45:00Z"
+        },
+        {
+          "customerId": 3,
+          "customerName": "Emma Rodriguez",
+          "customerImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
           "engagementType": "like",
           "quote": null,
           "likes": null,
-          "timestamp": "2024-01-20T09:15:00Z"
+          "timestamp": "2024-01-18T08:30:00Z"
         }
       ],
       "audienceSentiment": {
-        "overall": "positive",
-        "score": 0.88,
+        "overall": "very_positive",
+        "score": 0.91,
         "breakdown": {
-          "positive": 79,
-          "neutral": 16,
-          "negative": 5
+          "positive": 84,
+          "neutral": 12,
+          "negative": 4
         },
-        "topThemes": ["helpful", "scenic", "well-researched"],
+        "topThemes": ["actionable", "balanced", "life-changing"],
         "sampleVoices": [
-          "Best hiking channel for the Pacific Northwest region.",
-          "The gear reviews are honest and not just sponsored content.",
-          "Would love to see more beginner-friendly trail recommendations."
+          "This channel strikes the perfect balance between hustle culture and self-care.",
+          "Finally productivity advice that's realistic for people with full-time jobs.",
+          "Sometimes wish the videos were shorter, but the depth is valuable."
         ]
       }
     },
@@ -421,11 +475,11 @@
     {
       "id": 7,
       "platform": "instagram",
-      "name": "@UrbanStyleDaily",
-      "handle": "urbanstyledaily",
-      "url": "https://instagram.com/urbanstyledaily",
-      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
-      "description": "Street style, fashion trends, and lifestyle content for the modern urban professional.",
+      "name": "@PremiumTechDaily",
+      "handle": "premiumtechdaily",
+      "url": "https://instagram.com/premiumtechdaily",
+      "image": "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=400&h=400&fit=crop",
+      "description": "Premium gadgets, luxury tech accessories, and cutting-edge innovations for discerning professionals who value quality.",
       "stats": {
         "followers": 723000,
         "avgLikes": 34500,
@@ -434,44 +488,71 @@
         "postsPerWeek": 6
       },
       "targetCustomerEngagement": {
-        "count": 2,
-        "percentage": 33.3,
-        "alignmentPercentage": 35.6,
+        "count": 5,
+        "percentage": 83.3,
+        "alignmentPercentage": 51.2,
         "alignmentHint": "This is the percentage of the community members that are in your target customer group"
       },
       "engagedCustomers": [
         {
-          "customerId": 3,
-          "customerName": "Emma Rodriguez",
-          "customerImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+          "customerId": 2,
+          "customerName": "Marcus Johnson",
+          "customerImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
           "engagementType": "comment",
-          "quote": "Obsessed with this look! Where is that jacket from? Need it for Austin winter.",
-          "likes": 89,
+          "quote": "Just ordered those wireless earbuds. The attention to detail in your reviews is unmatched!",
+          "likes": 289,
           "timestamp": "2024-01-24T15:30:00Z"
         },
         {
-          "customerId": 5,
-          "customerName": "Olivia Thompson",
-          "customerImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
+          "customerId": 6,
+          "customerName": "James Williams",
+          "customerImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
           "engagementType": "comment",
-          "quote": "Love how you mix high and low fashion. Makes style feel accessible!",
+          "quote": "Love the daily drops of premium tech. My wishlist has never been longer!",
           "likes": 156,
           "timestamp": "2024-01-23T10:15:00Z"
+        },
+        {
+          "customerId": 4,
+          "customerName": "David Kim",
+          "customerImage": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+          "engagementType": "comment",
+          "quote": "Finally an account that showcases gadgets worth investing in. Quality over quantity!",
+          "likes": 423,
+          "timestamp": "2024-01-22T14:20:00Z"
+        },
+        {
+          "customerId": 1,
+          "customerName": "Sarah Chen",
+          "customerImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+          "engagementType": "comment",
+          "quote": "That smart water bottle changed my hydration game. Thanks for featuring products that actually improve daily life!",
+          "likes": 178,
+          "timestamp": "2024-01-21T09:45:00Z"
+        },
+        {
+          "customerId": 3,
+          "customerName": "Emma Rodriguez",
+          "customerImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+          "engagementType": "like",
+          "quote": null,
+          "likes": null,
+          "timestamp": "2024-01-20T16:30:00Z"
         }
       ],
       "audienceSentiment": {
-        "overall": "positive",
-        "score": 0.79,
+        "overall": "very_positive",
+        "score": 0.87,
         "breakdown": {
-          "positive": 71,
-          "neutral": 20,
-          "negative": 9
+          "positive": 78,
+          "neutral": 17,
+          "negative": 5
         },
-        "topThemes": ["stylish", "relatable", "trendy"],
+        "topThemes": ["premium", "curated", "innovative"],
         "sampleVoices": [
-          "My go-to account for outfit inspiration every morning.",
-          "Love the mix of accessible and aspirational fashion.",
-          "Would appreciate more body-diverse representation."
+          "My favorite account for discovering gadgets I didn't know I needed!",
+          "Love the focus on quality over quantity. Worth every penny.",
+          "Sometimes wish there were more affordable options featured."
         ]
       }
     },

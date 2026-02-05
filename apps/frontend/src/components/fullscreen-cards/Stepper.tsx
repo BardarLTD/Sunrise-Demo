@@ -1,7 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
 interface StepperProps {
   steps: number;
   currentStep: number;
@@ -10,31 +8,22 @@ interface StepperProps {
 
 export function Stepper({ steps, currentStep, onStepClick }: StepperProps) {
   return (
-    <div className="fixed right-8 top-1/2 z-50 flex -translate-y-1/2 flex-col items-center">
-      {Array.from({ length: steps }, (_, index) => (
-        <div key={index} className="flex flex-col items-center">
-          <motion.button
+    <div className="fixed right-6 top-1/2 z-50 -translate-y-1/2">
+      <div className="flex flex-col items-center gap-1 rounded-2xl bg-[#232323] p-2">
+        {Array.from({ length: steps }, (_, index) => (
+          <button
+            key={index}
             onClick={() => onStepClick(index)}
-            className={`flex h-10 w-10 items-center justify-center rounded-full border-2 text-sm font-medium transition-colors ${
+            className={`flex h-12 w-12 items-center justify-center rounded-xl text-lg font-medium transition-all duration-300 ${
               currentStep === index
-                ? 'border-primary bg-primary text-primary-foreground'
-                : 'border-muted-foreground bg-white text-muted-foreground hover:border-primary hover:text-primary'
+                ? 'bg-[#3a3a3a] text-white'
+                : 'text-slate-500 hover:text-slate-300'
             }`}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
           >
             {index + 1}
-          </motion.button>
-
-          {index < steps - 1 && (
-            <div
-              className={`h-8 w-0.5 ${
-                currentStep > index ? 'bg-primary' : 'bg-muted-foreground/30'
-              }`}
-            />
-          )}
-        </div>
-      ))}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import FeedbackButton from '@/components/FeedbackButton';
 import { mixpanelService } from '@/lib/mixpanel';
 
 interface ChatDialogProps {
@@ -107,19 +106,14 @@ export function ChatDialog({
             >
               Generate Prompt
             </button>
-            <FeedbackButton
-              question="How did you get this customer profile?"
-              buttonText="Continue"
-              onClick={() => handleSubmit()}
-              answerType="text"
+            <button
+              type="submit"
               disabled={!message.trim()}
               className="flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <>
-                Continue
-                <ArrowRight className="h-4 w-4" />
-              </>
-            </FeedbackButton>
+              Continue
+              <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
         </form>
       </div>
