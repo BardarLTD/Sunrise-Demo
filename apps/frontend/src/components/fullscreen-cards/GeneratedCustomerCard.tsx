@@ -67,23 +67,25 @@ export function GeneratedCustomerCard({
 }: GeneratedCustomerCardProps) {
   return (
     <div
-      className={`relative flex h-[420px] w-[820px] shrink-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#232323] to-[#1a1a1a] p-8 shadow-2xl transition-all duration-300 ${
+      className={`relative flex h-auto min-h-[420px] w-full max-w-[600px] lg:max-w-[700px] xl:max-w-[820px] shrink-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#232323] to-[#1a1a1a] p-6 lg:p-8 shadow-2xl transition-all duration-300 ${
         isActive ? 'scale-105 opacity-100' : 'scale-95 opacity-60'
       }`}
     >
       {/* Header with Profile Circle */}
-      <div className="mb-6">
-        <div className="flex items-start gap-4">
+      <div className="mb-4 lg:mb-6">
+        <div className="flex items-start gap-3 lg:gap-4">
           {/* Profile Circle */}
           <div
-            className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-white/20 text-lg font-bold text-white ${getColorFromName(customer.name)}`}
+            className={`flex h-12 w-12 lg:h-16 lg:w-16 shrink-0 items-center justify-center rounded-full border-2 border-white/20 text-base lg:text-lg font-bold text-white ${getColorFromName(customer.name)}`}
           >
             {getInitials(customer.name)}
           </div>
 
           {/* Name and Info */}
-          <div className="flex-1">
-            <h3 className="text-2xl font-bold text-white">{customer.name}</h3>
+          <div className="flex-1 min-w-0">
+            <h3 className="text-xl lg:text-2xl font-bold text-white truncate">
+              {customer.name}
+            </h3>
 
             {/* Platform Icons */}
             <div className="mt-2 flex items-center gap-2">
@@ -110,33 +112,33 @@ export function GeneratedCustomerCard({
       </div>
 
       {/* Demographics */}
-      <div className="mb-4">
+      <div className="mb-3 lg:mb-4">
         <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
           Demographics
         </h4>
-        <div className="flex gap-2">
-          <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-sm text-emerald-200 ring-1 ring-emerald-500/30">
+        <div className="flex flex-wrap gap-2">
+          <span className="rounded-full bg-emerald-500/20 px-2.5 lg:px-3 py-1 text-xs lg:text-sm text-emerald-200 ring-1 ring-emerald-500/30 whitespace-nowrap">
             {customer.age} years
           </span>
-          <span className="rounded-full bg-white/10 px-3 py-1 text-sm text-slate-300">
+          <span className="rounded-full bg-white/10 px-2.5 lg:px-3 py-1 text-xs lg:text-sm text-slate-300 whitespace-nowrap">
             {customer.salaryRange}
           </span>
-          <span className="rounded-full bg-white/10 px-3 py-1 text-sm text-slate-300">
+          <span className="rounded-full bg-white/10 px-2.5 lg:px-3 py-1 text-xs lg:text-sm text-slate-300">
             {customer.workRole}
           </span>
         </div>
       </div>
 
       {/* Interests */}
-      <div className="mb-4">
+      <div className="mb-3 lg:mb-4">
         <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
           Interests
         </h4>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5 lg:gap-2">
           {customer.relevantInterests.map((interest) => (
             <span
               key={interest}
-              className="rounded-full bg-emerald-500/20 px-3 py-1 text-sm font-medium text-emerald-200 ring-1 ring-emerald-500/30 transition-all"
+              className="rounded-full bg-emerald-500/20 px-2.5 lg:px-3 py-1 text-xs lg:text-sm font-medium text-emerald-200 ring-1 ring-emerald-500/30 transition-all"
             >
               {interest}
             </span>
@@ -144,7 +146,7 @@ export function GeneratedCustomerCard({
           {customer.otherInterests.map((interest) => (
             <span
               key={interest}
-              className="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-slate-300 transition-all"
+              className="rounded-full bg-white/10 px-2.5 lg:px-3 py-1 text-xs lg:text-sm font-medium text-slate-300 transition-all"
             >
               {interest}
             </span>
@@ -153,12 +155,12 @@ export function GeneratedCustomerCard({
       </div>
 
       {/* Buyer Signals */}
-      <div className="mt-auto">
+      <div className="mt-auto pt-2">
         <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
           Recent Activity
         </h4>
-        <div className="rounded-lg bg-purple-500/10 p-3 ring-1 ring-purple-500/20">
-          <p className="text-sm leading-relaxed text-slate-200">
+        <div className="rounded-lg bg-purple-500/10 p-2.5 lg:p-3 ring-1 ring-purple-500/20">
+          <p className="text-xs lg:text-sm leading-relaxed text-slate-200">
             {customer.buyerSignals}
           </p>
         </div>

@@ -146,21 +146,21 @@ export function GeneratedCommunityCard({
   community,
 }: GeneratedCommunityCardProps) {
   return (
-    <div className="w-full rounded-2xl border border-white/10 bg-gradient-to-br from-[#232323] to-[#1a1a1a] shadow-2xl">
-      <div className="p-8">
+    <div className="w-full max-w-[850px] mx-auto rounded-2xl border border-white/10 bg-gradient-to-br from-[#232323] to-[#1a1a1a] shadow-2xl">
+      <div className="p-4 lg:p-6 xl:p-8">
         {/* Header with Profile Circle */}
-        <div className="mb-6 flex items-start gap-4">
+        <div className="mb-4 lg:mb-6 flex items-start gap-3 lg:gap-4">
           {/* Profile Circle */}
           <div
-            className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-white/20 text-lg font-bold text-white ${getColorFromName(community.name)}`}
+            className={`flex h-12 w-12 lg:h-16 lg:w-16 shrink-0 items-center justify-center rounded-full border-2 border-white/20 text-base lg:text-lg font-bold text-white ${getColorFromName(community.name)}`}
           >
             {getInitials(community.name)}
           </div>
 
           {/* Name and Badges */}
-          <div className="flex-1">
-            <div className="mb-2 flex items-center gap-2">
-              <h3 className="text-2xl font-bold text-white">
+          <div className="flex-1 min-w-0">
+            <div className="mb-2 flex items-center gap-2 flex-wrap">
+              <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-white break-words">
                 {community.name}
               </h3>
               <button
@@ -198,79 +198,79 @@ export function GeneratedCommunityCard({
         </div>
 
         {/* Stats Row */}
-        <div className="mb-6 grid grid-cols-3 gap-3">
-          <div className="rounded-lg bg-white/5 p-3">
-            <div className="mb-1 flex items-center gap-2 text-slate-400">
-              <Users size={14} />
+        <div className="mb-4 lg:mb-6 grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-3">
+          <div className="rounded-lg bg-white/5 p-2.5 lg:p-3">
+            <div className="mb-1 flex items-center gap-1.5 lg:gap-2 text-slate-400">
+              <Users size={12} className="lg:w-3.5 lg:h-3.5" />
               <span className="text-xs font-medium uppercase tracking-wider">
                 Followers
               </span>
             </div>
-            <p className="text-xl font-bold text-white">
+            <p className="text-lg lg:text-xl font-bold text-white">
               {formatFollowers(community.followers)}
             </p>
           </div>
-          <div className="rounded-lg bg-white/5 p-3">
-            <div className="mb-1 flex items-center gap-2 text-slate-400">
-              <TrendingUp size={14} />
+          <div className="rounded-lg bg-white/5 p-2.5 lg:p-3">
+            <div className="mb-1 flex items-center gap-1.5 lg:gap-2 text-slate-400">
+              <TrendingUp size={12} className="lg:w-3.5 lg:h-3.5" />
               <span className="text-xs font-medium uppercase tracking-wider">
                 Growth
               </span>
             </div>
-            <p className="text-xl font-bold text-emerald-400">
+            <p className="text-lg lg:text-xl font-bold text-emerald-400">
               {community.followerGrowth}
             </p>
           </div>
-          <div className="rounded-lg bg-white/5 p-3">
+          <div className="rounded-lg bg-white/5 p-2.5 lg:p-3">
             <div className="mb-1 text-xs font-medium uppercase tracking-wider text-slate-400">
               Post Frequency
             </div>
-            <p className="text-xl font-bold text-white">
+            <p className="text-lg lg:text-xl font-bold text-white">
               {community.postFrequency}
             </p>
           </div>
-          <div className="rounded-lg bg-white/5 p-3">
-            <div className="mb-1 flex items-center gap-2 text-slate-400">
-              <TrendingUp size={14} />
+          <div className="rounded-lg bg-white/5 p-2.5 lg:p-3">
+            <div className="mb-1 flex items-center gap-1.5 lg:gap-2 text-slate-400">
+              <TrendingUp size={12} className="lg:w-3.5 lg:h-3.5" />
               <span className="text-xs font-medium uppercase tracking-wider">
                 Engagement
               </span>
             </div>
-            <p className="text-xl font-bold text-emerald-400">
+            <p className="text-lg lg:text-xl font-bold text-emerald-400">
               {community.engagementRate}
             </p>
           </div>
-          <div className="col-span-2 rounded-lg bg-white/5 p-3">
-            <div className="mb-1 flex items-center gap-2 text-slate-400">
-              <Target size={14} />
+          <div className="col-span-2 lg:col-span-2 rounded-lg bg-white/5 p-2.5 lg:p-3">
+            <div className="mb-1 flex items-center gap-1.5 lg:gap-2 text-slate-400">
+              <Target size={12} className="lg:w-3.5 lg:h-3.5" />
               <span className="text-xs font-medium uppercase tracking-wider">
                 Projected ROI
               </span>
             </div>
-            <p className="text-xl font-bold text-purple-400">
+            <p className="text-lg lg:text-xl font-bold text-purple-400">
               {community.projectedROI}
             </p>
           </div>
         </div>
 
         {/* Description */}
-        <div className="mb-6">
-          <h4 className="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-400">
+        <div className="mb-4 lg:mb-6">
+          <h4 className="mb-2 text-xs lg:text-sm font-semibold uppercase tracking-wider text-slate-400">
             About
           </h4>
-          <p className="leading-relaxed text-slate-300">
+          <p className="text-sm lg:text-base leading-relaxed text-slate-300">
             {community.description}
           </p>
         </div>
 
         {/* Customer Engagement */}
         {community.customerEngagement && (
-          <div className="mb-6">
-            <h4 className="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-400">
+          <div className="mb-4 lg:mb-6">
+            <h4 className="mb-2 text-xs lg:text-sm font-semibold uppercase tracking-wider text-slate-400">
               Your Customer Activity
             </h4>
-            <div className="rounded-lg bg-emerald-500/10 p-4 ring-1 ring-emerald-500/20">
-              <p className="text-sm leading-relaxed text-slate-200">
+            <div className="rounded-lg bg-emerald-500/10 p-3 lg:p-4 ring-1 ring-emerald-500/20">
+              <p className="text-xs lg:text-sm leading-relaxed text-slate-200">
                 {highlightCustomerNames(community.customerEngagement)}
               </p>
             </div>
@@ -279,15 +279,15 @@ export function GeneratedCommunityCard({
 
         {/* Follower Quotes */}
         {community.followerQuotes && community.followerQuotes.length > 0 && (
-          <div className="mb-6">
-            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-400">
+          <div className="mb-4 lg:mb-6">
+            <h4 className="mb-2 lg:mb-3 text-xs lg:text-sm font-semibold uppercase tracking-wider text-slate-400">
               Community Sentiment
             </h4>
             <div className="space-y-2">
               {community.followerQuotes.map((item, i) => (
                 <div
                   key={i}
-                  className="rounded-lg bg-white/5 px-4 py-3 text-sm text-slate-300"
+                  className="rounded-lg bg-white/5 px-3 lg:px-4 py-2 lg:py-3 text-xs lg:text-sm text-slate-300"
                 >
                   <div className="mb-1 font-semibold text-blue-300">
                     {item.username}
@@ -300,7 +300,7 @@ export function GeneratedCommunityCard({
         )}
 
         {/* Action Buttons */}
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-2 lg:gap-3">
           <FeedbackButton
             question="How important is going from this insight to an action such as setting up an ad campaign or reaching the talent. And how valuable would this be if it were automated through AI agent? Try to quantify any value you see as much as possible."
             buttonText={getActionButtonText(
@@ -312,7 +312,7 @@ export function GeneratedCommunityCard({
               // No navigation - just collect feedback
             }}
             answerType="text"
-            className="flex-1 rounded-lg border border-white/20 bg-gradient-to-br from-blue-600/80 to-blue-700/80 px-6 py-3 text-base font-semibold text-white transition-all hover:from-blue-600 hover:to-blue-700 hover:border-white/30 hover:shadow-lg"
+            className="flex-1 rounded-lg border border-white/20 bg-gradient-to-br from-blue-600/80 to-blue-700/80 px-4 lg:px-6 py-2.5 lg:py-3 text-sm lg:text-base font-semibold text-white transition-all hover:from-blue-600 hover:to-blue-700 hover:border-white/30 hover:shadow-lg"
           >
             <>
               {getActionButtonText(
@@ -334,10 +334,10 @@ export function GeneratedCommunityCard({
                 timestamp: new Date().toISOString(),
               });
             }}
-            className="flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-base font-semibold text-white transition-all hover:bg-white/10 hover:border-white/30 hover:shadow-lg"
+            className="flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 lg:px-6 py-2.5 lg:py-3 text-sm lg:text-base font-semibold text-white transition-all hover:bg-white/10 hover:border-white/30 hover:shadow-lg sm:flex-none"
           >
-            <Bookmark size={18} />
-            Save channel
+            <Bookmark size={16} className="lg:w-[18px] lg:h-[18px]" />
+            <span className="sm:inline">Save channel</span>
           </button>
         </div>
       </div>

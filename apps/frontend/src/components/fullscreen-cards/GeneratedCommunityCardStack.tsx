@@ -31,32 +31,36 @@ export function GeneratedCommunityCardStack({
   const totalChannels = 15;
 
   return (
-    <div className="flex h-full w-full gap-6 px-8">
+    <div className="flex h-full w-full gap-4 lg:gap-6 px-4 lg:px-8">
       {/* Left: Navigation Panel */}
-      <div className="flex w-80 shrink-0 flex-col justify-center">
-        <div className="rounded-2xl border border-white/10 bg-[#232323] p-6 shadow-2xl">
-          <h3 className="mb-4 text-xl font-bold text-white">
+      <div className="flex w-64 lg:w-72 xl:w-80 shrink-0 flex-col justify-center">
+        <div className="rounded-2xl border border-white/10 bg-[#232323] p-4 lg:p-5 xl:p-6 shadow-2xl">
+          <h3 className="mb-3 lg:mb-4 text-lg lg:text-xl font-bold text-white">
             Channel Analysis
           </h3>
 
           {/* Stats */}
-          <div className="mb-4 space-y-3">
+          <div className="mb-3 lg:mb-4 space-y-2 lg:space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-slate-400">Channels Found</span>
-              <span className="text-lg font-bold text-emerald-300">
+              <span className="text-xs lg:text-sm text-slate-400">
+                Channels Found
+              </span>
+              <span className="text-base lg:text-lg font-bold text-emerald-300">
                 {totalChannels}
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-slate-400">Average ROI</span>
-              <span className="text-lg font-bold text-emerald-300">
+              <span className="text-xs lg:text-sm text-slate-400">
+                Average ROI
+              </span>
+              <span className="text-base lg:text-lg font-bold text-emerald-300">
                 {averageROI}
               </span>
             </div>
           </div>
 
           {/* Navigation Info */}
-          <div className="mb-4 flex items-center justify-between text-sm text-slate-400">
+          <div className="mb-3 lg:mb-4 flex items-center justify-between text-xs lg:text-sm text-slate-400">
             <span>
               Channel {currentIndex + 1} of {communities.length}
             </span>
@@ -66,20 +70,20 @@ export function GeneratedCommunityCardStack({
           <div className="flex gap-2">
             <button
               onClick={goToPrev}
-              className="flex h-10 flex-1 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
+              className="flex h-9 lg:h-10 flex-1 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-4 w-4 lg:h-5 lg:w-5" />
             </button>
             <button
               onClick={goToNext}
-              className="flex h-10 flex-1 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
+              className="flex h-9 lg:h-10 flex-1 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-4 w-4 lg:h-5 lg:w-5" />
             </button>
           </div>
 
           {/* Filter Button */}
-          <div className="mt-4">
+          <div className="mt-3 lg:mt-4">
             <FeedbackButton
               question="*This feature is in development*. To make it as powerful as possible, please tell us a. What filters you would want and b. How your budget impacts marketing choices"
               buttonText="Filter by channel and budget"
@@ -87,7 +91,7 @@ export function GeneratedCommunityCardStack({
                 // No navigation - just collect feedback
               }}
               answerType="text"
-              className="w-full rounded-lg border border-emerald-500/30 bg-emerald-900/20 py-2 text-sm font-medium text-emerald-400 transition-colors hover:border-emerald-500/50 hover:bg-emerald-900/30 hover:text-emerald-300"
+              className="w-full rounded-lg border border-emerald-500/30 bg-emerald-900/20 py-1.5 lg:py-2 text-xs lg:text-sm font-medium text-emerald-400 transition-colors hover:border-emerald-500/50 hover:bg-emerald-900/30 hover:text-emerald-300"
             >
               <>Filter by channel and budget</>
             </FeedbackButton>

@@ -77,7 +77,7 @@ export function CustomerControlPanel({
   };
 
   return (
-    <div className="flex h-full w-full items-center justify-center px-8">
+    <div className="flex h-full w-full items-center justify-center px-4 lg:px-6 xl:px-8">
       <AnimatePresence mode="wait">
         {!isExpanded ? (
           <motion.div
@@ -85,41 +85,43 @@ export function CustomerControlPanel({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="w-full max-w-3xl rounded-2xl border border-white/10 bg-[#232323] p-8 shadow-2xl"
+            className="w-full max-w-3xl rounded-2xl border border-white/10 bg-[#232323] p-4 lg:p-6 xl:p-8 shadow-2xl"
           >
             {/* Header */}
-            <div className="mb-6 text-center">
-              <h3 className="text-2xl font-bold text-white">
+            <div className="mb-4 lg:mb-6 text-center">
+              <h3 className="text-xl lg:text-2xl font-bold text-white">
                 Customer Analysis Complete
               </h3>
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 text-xs lg:text-sm text-slate-400">
                 We found real people matching your target persona
               </p>
             </div>
 
             {/* Stats Grid */}
-            <div className="mb-6 grid grid-cols-2 gap-4">
+            <div className="mb-4 lg:mb-6 grid grid-cols-2 gap-3 lg:gap-4">
               {/* People Found */}
-              <div className="rounded-xl border border-emerald-500/30 bg-emerald-900/20 p-6">
-                <p className="text-sm font-medium text-emerald-400">
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-900/20 p-4 lg:p-6">
+                <p className="text-xs lg:text-sm font-medium text-emerald-400">
                   People Found
                 </p>
-                <p className="mt-2 text-4xl font-bold text-emerald-300">
+                <p className="mt-1 lg:mt-2 text-2xl lg:text-4xl font-bold text-emerald-300">
                   1,042
                 </p>
               </div>
 
               {/* Average Alignment */}
-              <div className="rounded-xl border border-emerald-500/30 bg-emerald-900/20 p-6">
-                <p className="text-sm font-medium text-emerald-400">
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-900/20 p-4 lg:p-6">
+                <p className="text-xs lg:text-sm font-medium text-emerald-400">
                   Average Alignment
                 </p>
-                <p className="mt-2 text-4xl font-bold text-emerald-300">92%</p>
+                <p className="mt-1 lg:mt-2 text-2xl lg:text-4xl font-bold text-emerald-300">
+                  92%
+                </p>
               </div>
             </div>
 
             {/* Alignment Range */}
-            <div className="mb-6 rounded-xl border border-white/10 bg-white/5 p-6">
+            <div className="mb-4 lg:mb-6 rounded-xl border border-white/10 bg-white/5 p-4 lg:p-6">
               <p className="mb-4 text-sm font-medium text-slate-300">
                 Alignment Range
               </p>
@@ -150,21 +152,21 @@ export function CustomerControlPanel({
             </div>
 
             {/* Profile Photos */}
-            <div className="mb-6">
-              <p className="mb-3 text-sm font-medium text-slate-300">
+            <div className="mb-4 lg:mb-6">
+              <p className="mb-2 lg:mb-3 text-xs lg:text-sm font-medium text-slate-300">
                 Sample Profiles
               </p>
-              <div className="flex gap-2">
+              <div className="flex gap-1.5 lg:gap-2">
                 {customers.slice(0, 8).map((customer) => (
                   <div
                     key={customer.id}
-                    className={`flex h-12 w-12 items-center justify-center rounded-full border-2 border-white/20 text-sm font-bold text-white transition-transform hover:scale-110 hover:border-emerald-400/50 ${getColorFromName(customer.name)}`}
+                    className={`flex h-10 w-10 lg:h-12 lg:w-12 items-center justify-center rounded-full border-2 border-white/20 text-xs lg:text-sm font-bold text-white transition-transform hover:scale-110 hover:border-emerald-400/50 ${getColorFromName(customer.name)}`}
                   >
                     {getInitials(customer.name)}
                   </div>
                 ))}
                 {customers.length > 8 && (
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-dashed border-white/20 text-xs font-medium text-slate-400">
+                  <div className="flex h-10 w-10 lg:h-12 lg:w-12 items-center justify-center rounded-full border-2 border-dashed border-white/20 text-xs font-medium text-slate-400">
                     +{customers.length - 8}
                   </div>
                 )}
@@ -172,10 +174,10 @@ export function CustomerControlPanel({
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-2 lg:gap-3">
               <button
                 onClick={handleViewCustomers}
-                className="group relative flex-1 overflow-hidden rounded-xl border border-white/10 py-4 text-base font-medium text-white transition-all hover:text-white"
+                className="group relative flex-1 overflow-hidden rounded-xl border border-white/10 py-3 lg:py-4 text-sm lg:text-base font-medium text-white transition-all hover:text-white"
               >
                 <div
                   className="absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-40"
@@ -187,7 +189,7 @@ export function CustomerControlPanel({
 
               <button
                 onClick={handleViewCommunities}
-                className="group relative flex-1 overflow-hidden rounded-xl border border-emerald-500/30 py-4 text-base font-medium text-emerald-400 transition-all hover:border-emerald-500/50 hover:text-emerald-300"
+                className="group relative flex-1 overflow-hidden rounded-xl border border-emerald-500/30 py-3 lg:py-4 text-sm lg:text-base font-medium text-emerald-400 transition-all hover:border-emerald-500/50 hover:text-emerald-300"
               >
                 <div className="absolute inset-0 bg-emerald-900/20 transition-opacity duration-300 group-hover:bg-emerald-900/30" />
                 <span className="relative z-10">
@@ -202,34 +204,38 @@ export function CustomerControlPanel({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="flex h-full w-full gap-6"
+            className="flex h-full w-full gap-4 lg:gap-6"
           >
             {/* Left: Control Panel (collapsed) */}
-            <div className="flex w-80 shrink-0 flex-col justify-center">
-              <div className="rounded-2xl border border-white/10 bg-[#232323] p-6 shadow-2xl">
-                <h3 className="mb-4 text-xl font-bold text-white">
+            <div className="flex w-64 lg:w-72 xl:w-80 shrink-0 flex-col justify-center">
+              <div className="rounded-2xl border border-white/10 bg-[#232323] p-4 lg:p-5 xl:p-6 shadow-2xl">
+                <h3 className="mb-3 lg:mb-4 text-lg lg:text-xl font-bold text-white">
                   Customer Analysis
                 </h3>
 
                 {/* Compact Stats */}
-                <div className="mb-4 space-y-3">
+                <div className="mb-3 lg:mb-4 space-y-2 lg:space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-400">People Found</span>
-                    <span className="text-lg font-bold text-emerald-300">
+                    <span className="text-xs lg:text-sm text-slate-400">
+                      People Found
+                    </span>
+                    <span className="text-base lg:text-lg font-bold text-emerald-300">
                       1,042
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-400">
+                    <span className="text-xs lg:text-sm text-slate-400">
                       Avg Alignment
                     </span>
-                    <span className="text-lg font-bold text-emerald-300">
+                    <span className="text-base lg:text-lg font-bold text-emerald-300">
                       92%
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-400">Range</span>
-                    <span className="text-sm font-medium text-slate-300">
+                    <span className="text-xs lg:text-sm text-slate-400">
+                      Range
+                    </span>
+                    <span className="text-xs lg:text-sm font-medium text-slate-300">
                       78% - 99%
                     </span>
                   </div>
@@ -255,7 +261,7 @@ export function CustomerControlPanel({
                 </div>
 
                 {/* Navigation Info */}
-                <div className="mb-4 flex items-center justify-between text-sm text-slate-400">
+                <div className="mb-3 lg:mb-4 flex items-center justify-between text-xs lg:text-sm text-slate-400">
                   <span>
                     Customer {activeIndex + 1} of {customers.length}
                   </span>
@@ -265,20 +271,20 @@ export function CustomerControlPanel({
                 <div className="flex gap-2">
                   <button
                     onClick={goToPrev}
-                    className="flex h-10 flex-1 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
+                    className="flex h-9 lg:h-10 flex-1 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
                   >
-                    <ChevronLeft className="h-5 w-5" />
+                    <ChevronLeft className="h-4 w-4 lg:h-5 lg:w-5" />
                   </button>
                   <button
                     onClick={goToNext}
-                    className="flex h-10 flex-1 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
+                    className="flex h-9 lg:h-10 flex-1 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
                   >
-                    <ChevronRight className="h-5 w-5" />
+                    <ChevronRight className="h-4 w-4 lg:h-5 lg:w-5" />
                   </button>
                 </div>
 
                 {/* Contact Customers Button */}
-                <div className="mt-4">
+                <div className="mt-3 lg:mt-4">
                   <FeedbackButton
                     question="*This feature is under development*. To help us create the best possible experience, please tell us a. how you would like to contact customers (i.e. automated marketing DM, email survey etc.) and b. what material impact this could have on your marketing?"
                     buttonText="Contact Customers"
@@ -286,14 +292,14 @@ export function CustomerControlPanel({
                       // No navigation - just collect feedback
                     }}
                     answerType="text"
-                    className="w-full rounded-lg border border-emerald-500/30 bg-emerald-900/20 py-2 text-sm font-medium text-emerald-400 transition-colors hover:border-emerald-500/50 hover:bg-emerald-900/30 hover:text-emerald-300"
+                    className="w-full rounded-lg border border-emerald-500/30 bg-emerald-900/20 py-1.5 lg:py-2 text-xs lg:text-sm font-medium text-emerald-400 transition-colors hover:border-emerald-500/50 hover:bg-emerald-900/30 hover:text-emerald-300"
                   />
                 </div>
 
                 {/* Close Button */}
                 <button
                   onClick={() => setIsExpanded(false)}
-                  className="mt-3 w-full rounded-lg border border-white/10 py-2 text-sm text-slate-400 transition-colors hover:bg-white/5 hover:text-white"
+                  className="mt-2 lg:mt-3 w-full rounded-lg border border-white/10 py-1.5 lg:py-2 text-xs lg:text-sm text-slate-400 transition-colors hover:bg-white/5 hover:text-white"
                 >
                   Close Customer View
                 </button>
