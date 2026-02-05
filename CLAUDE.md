@@ -7,7 +7,6 @@ This file contains conventions and rules for AI assistants (like Claude) working
 This is a turborepo monorepo with:
 
 - **Frontend**: Next.js 15 with App Router (`apps/frontend`)
-- **Backend**: Express.js (`apps/backend`)
 - **Shared Packages**: TypeScript and ESLint configs (`packages/`)
 
 ## Critical Rules
@@ -69,7 +68,6 @@ This is a turborepo monorepo with:
 - Frontend pages: `apps/frontend/src/app/`
 - Frontend API: `apps/frontend/src/api/`
 - Frontend queries: `apps/frontend/src/api/queries/`
-- Backend routes: `apps/backend/src/`
 
 ### API Structure
 
@@ -81,6 +79,7 @@ The frontend uses a centralized API pattern:
 4. **Add new endpoints**: Add method to API class, create query hook in appropriate file
 
 Example:
+
 ```typescript
 // In api.ts - add method
 getUsers(): Promise<User[]> {
@@ -99,38 +98,62 @@ export const useGetUsers = () => {
 ### Commands
 
 ```bash
-# Development (starts both frontend and backend)
+# Development
 pnpm run dev
 
-# Build all apps
+# Build
 pnpm run build
 
-# Lint all apps
+# Lint
 pnpm run lint
 
-# Type check all apps
+# Type check
 pnpm run typecheck
 
 # Format all files
 pnpm run format
-
-# Run specific app
-pnpm --filter @repo/frontend dev
-pnpm --filter @repo/backend dev
 ```
 
 ### Environment Variables
 
-- Frontend: Use `.env.local` for local development
-- Backend: Use `.env` for local development
-- Never commit `.env` files
+The project uses a strict environment variable validation system that **crashes the application** if required variables are missing.
 
-### API Communication
+#### Required Variables
 
-- Backend runs on port 3001
-- Frontend runs on port 3000
-- Use `/api/` prefix for all backend endpoints
-- Configure `NEXT_PUBLIC_API_URL` in frontend for production
+**Server-side** (NOT prefixed with `NEXT_PUBLIC_`):
+
+- `OPENROUTER_API_KEY` - API key for OpenRouter (required for AI features)
+
+**Client-side** (MUST be prefixed with `NEXT_PUBLIC_`):
+
+- `NEXT_PUBLIC_MIXPANEL_TOKEN` - Token for Mixpanel analytics
+
+#### Optional Variables
+
+**Server-side**:
+
+- `OPENROUTER_BASE_URL` - OpenRouter API base URL (default: `https://openrouter.ai/api/v1`)
+- `OPENROUTER_APP_URL` - App URL for OpenRouter headers (default: `http://localhost:3000`)
+- `OPENROUTER_APP_NAME` - App name for OpenRouter headers (default: `Sunrise Demo`)
+- `OPENROUTER_MODEL` - Default AI model to use (default: `anthropic/claude-3-5-sonnet`)
+
+**Client-side**:
+
+- `NEXT_PUBLIC_MIXPANEL_API_HOST` - Mixpanel API host (default: `https://api.mixpanel.com`)
+
+#### Setup Instructions
+
+1. Create `.env.local` in `apps/frontend/` with all required variables
+2. Never commit `.env` or `.env.local` files
+3. If a required variable is missing, the app will crash with a clear error message listing which variables are missing
+
+#### Environment Validation
+
+- Validation runs automatically when the app starts (via `src/lib/env.ts`)
+- Server-side validation checks all required variables
+- Client-side validation only checks `NEXT_PUBLIC_*` variables
+- Missing variables will cause immediate crash with clear error messages
+- All environment variables are accessed through the typed `env` object exported from `src/lib/env.ts`
 
 ## What NOT to Do
 
